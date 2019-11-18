@@ -29,16 +29,10 @@ const App = () => {
             </li>
           </ul>
           <Switch>
-            <PrivateRoute path="/protected" component={() => <InitialPage />} />
-            <Route path="/" component={Login} />
             <Route path="/login" component={Login} />
-            <Route
-              path="/register"
-              render={props => {
-                return <Register />;
-              }}
-            />
+            <Route path="/register" component={Register} />
           </Switch>
+          <PrivateRoute path="/protected" component={() => <InitialPage />} />
         </div>
       </Router>
     </div>
