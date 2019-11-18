@@ -1,43 +1,26 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  Redirect
-} from "react-router-dom";
-import { axiosWithAuth } from "./axiosWithAuth/axiosWithAuth";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import "./App.css";
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-//components
-import Login from "./components/Login&Reg/Login";
-import Register from "./components/Login&Reg/Register";
-import InitialPage from "./components/InitialPage/InitialPage";
-
-const App = () => {
+function App() {
   return (
     <div className="App">
-      <Router>
-        <div className="App">
-          {/* <ul>
-            <li>
-              <Link to="/login">Public Page</Link>
-            </li>
-            <li>
-              <Link to="/protected">Protected Page</Link>
-            </li>
-          </ul> */}
-          <Switch>
-            <PrivateRoute path="/protected" component={() => <InitialPage />} />
-            <Route exact path="/" component={Login} />
-            <Route to="/login" component={Login} />
-            <Route to="/register" component={Register} />
-          </Switch>
-        </div>
-      </Router>
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
-};
+}
 
 export default App;
