@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import "./login.css";
 
@@ -32,40 +32,38 @@ const Login = props => {
       .catch(err => console.log(err));
   };
 
+  // const register = () => {
+  //   props.history.push("/register");
+  // };
+
   console.log(credentials);
   return (
-    <Router>
-      <div className="login">
-        <form onSubmit={login}>
-          <div className="inputs">
-            <p>Username:</p>
-            <input
-              type="text"
-              name="username"
-              placeholder="username"
-              value={credentials.username}
-              onChange={handleChange}
-            />
-            <p>Password:</p>
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              value={credentials.password}
-              onChange={handleChange}
-            />
-          </div>
-          <button className="login-btn">Login</button>
-          <div className="regis-container">
-            <ul className="ul">
-              <li>
-                <Link to="/register">Register</Link>
-              </li>
-            </ul>
-          </div>
-        </form>
-      </div>
-    </Router>
+    <div className="login">
+      <form onSubmit={login}>
+        <div className="inputs">
+          <p>Username:</p>
+          <input
+            type="text"
+            name="username"
+            placeholder="username"
+            value={credentials.username}
+            onChange={handleChange}
+          />
+          <p>Password:</p>
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={credentials.password}
+            onChange={handleChange}
+          />
+        </div>
+        <button className="login-btn">Login</button>
+        <div className="regis-container">
+          <NavLink to="/register">Register</NavLink>
+        </div>
+      </form>
+    </div>
   );
 };
 
