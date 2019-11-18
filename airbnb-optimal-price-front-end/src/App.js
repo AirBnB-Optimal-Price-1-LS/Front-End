@@ -6,7 +6,7 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import { axiosWithAuth } from "./axiosWithAuth/axiosWithAuth";
+// import { axiosWithAuth } from "./axiosWithAuth/axiosWithAuth";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import "./App.css";
 
@@ -20,19 +20,24 @@ const App = () => {
     <div className="App">
       <Router>
         <div className="App">
-          {/* <ul>
+          <ul>
             <li>
-              <Link to="/login">Public Page</Link>
+              <Link to="/login">Login</Link>
             </li>
             <li>
-              <Link to="/protected">Protected Page</Link>
+              <Link to="/register">Register</Link>
             </li>
-          </ul> */}
+          </ul>
           <Switch>
             <PrivateRoute path="/protected" component={() => <InitialPage />} />
-            <Route exact path="/" component={Login} />
-            <Route to="/login" component={Login} />
-            <Route to="/register" component={Register} />
+            <Route path="/" component={Login} />
+            <Route path="/login" component={Login} />
+            <Route
+              path="/register"
+              render={props => {
+                return <Register />;
+              }}
+            />
           </Switch>
         </div>
       </Router>

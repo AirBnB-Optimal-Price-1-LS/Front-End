@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import "./login.css";
 
@@ -32,6 +32,10 @@ const Login = props => {
       .catch(err => console.log(err));
   };
 
+  // const register = () => {
+  //   props.history.push("/register");
+  // };
+
   console.log(credentials);
   return (
     <Router>
@@ -60,6 +64,7 @@ const Login = props => {
             <ul className="ul">
               <li>
                 <Link to="/register">Register</Link>
+                {/* <p onClick={register}>Register</p> */}
               </li>
             </ul>
           </div>
