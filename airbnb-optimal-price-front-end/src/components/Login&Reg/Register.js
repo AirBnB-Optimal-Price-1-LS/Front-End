@@ -8,7 +8,7 @@ let credential = {
   password: ""
 };
 
-const Register = () => {
+const Register = props => {
   const [credentials, setCredentials] = useState(credential);
 
   const handleChange = e => {
@@ -26,14 +26,9 @@ const Register = () => {
         "https://buildweek-airbnb.herokuapp.com/api/auth/register",
         credentials
       )
-      // .then(res => {
-      //   //set token
-      //   localStorage.setItem("token", res.data.payload);
-      //   //redirect
-      //   this.props.history.push("/protected");
-      // })
       .then(res => console.log(res))
       .catch(err => console.log(err));
+    props.history.push("/login");
   };
 
   console.log(credentials);
