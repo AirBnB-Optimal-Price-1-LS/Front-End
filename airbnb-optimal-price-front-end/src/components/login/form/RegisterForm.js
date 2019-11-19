@@ -48,7 +48,7 @@ function RegisterForm() {
                         <Field type='password' name='password' placeholder='password'/>
                     </div>
                     <div className='form-buttons'>
-                        <button type='submit' disabled={isSubmitting}>Register</button>
+                        <button type='submit' disabled={isSubmitting}>Submit</button>
                         <Link to='/login'><button>Login</button></Link>
                     </div>
                 </Form>
