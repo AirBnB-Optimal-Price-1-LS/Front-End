@@ -36,7 +36,7 @@ const Login = props => {
         //   UserId: res.data.user_id
         // });
         //redirect
-        props.history.push("/dashboard");
+        props.history.push("/Dashboard/Home");
         console.log(res);
       })
       .catch(err => console.log(err));

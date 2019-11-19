@@ -1,26 +1,32 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 //styles
 import "./Header.css";
 
 const Header = props => {
-  console.log("Header:", props.userProperty);
+  const { userProperty, loggedInUser } = useContext(UserContext);
+  console.log("HEADER CONTEXTS:", userProperty, loggedInUser);
+  console.log("HIS PROPS", props);
+
+  const redirectToAddListing = () => {
+    props.history.push("/Dashboard/addListing");
+  };
+
   return (
     <div className="Header-Container">
-      <h2>Welcome, {props.loggedInUser.username}</h2>
-      {props.userProperty.length === 0 ? (
+      <h2>Welcome, {loggedInUser.username}</h2>
+      {userProperty.length === 0 ? (
         <p>
-          Click Here To Add A Property! <button>Add Property!</button>
+          Click Here To Add A Property!{" "}
+          <button onClick={redirectToAddListing}>Add Property!</button>
         </p>
-      ) : props.userProperty.length === 1 ? (
+      ) : userProperty.length === 1 ? (
         <p>
-          You currently have {props.userProperty.length} property in your
-          inventory
+          You currently have {userProperty.length} property in your inventory
         </p>
       ) : (
         <p>
-          You currently have {props.userProperty.length} properties in your
-          inventory
+          You currently have {userProperty.length} properties in your inventory
         </p>
       )}
     </div>

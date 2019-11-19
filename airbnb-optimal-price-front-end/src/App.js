@@ -20,7 +20,7 @@ const App = props => {
       <Router>
         <div className="App">
           <Switch>
-            <Route exact path="/" component={<Login />} />
+            {/* <Route exact path="/" component={<Login />} /> */}
             <Route
               path="/login"
               render={props => {
@@ -29,7 +29,7 @@ const App = props => {
             />
             <Route path="/register" component={Register} />
           </Switch>
-          <PrivateRoute path="/dashboard" component={() => <DashBoard />} />
+          <PrivateRoute path="/Dashboard" component={() => <DashBoard />} />
         </div>
       </Router>
     </div>

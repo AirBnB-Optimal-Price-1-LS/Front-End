@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
+import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
 
 //components
 import Header from "./Header";
+import AddListing from "../../components/AddListingPage/AddListing";
+import EditListing from "../../components/EditListing/EditListing";
+import Home from "../../components/HomePage/Home";
 
 const id = window.localStorage.getItem("userId");
 
 const Dashboard = props => {
-  // console.log("DB PROPS:", props);
+  console.log("DB PROPS:", props);
   const [userProperty, setUserProperty] = useState([
     // {
     //   id: Date.now(),
@@ -21,34 +32,57 @@ const Dashboard = props => {
     // }
   ]);
   const [loggedInUser, SetLoggedInUser] = useState([]);
-  console.log("users Properties:", userProperty, loggedInUser);
+  console.log("users Properties:", userProperty);
 
   useEffect(() => {
     axiosWithAuth()
       .get(`/users/${id}/property`)
       .then(res => {
-        setUserProperty([...userProperty, { ...res.data }]);
+        setUserProperty([...userProperty, ...res.data]);
         console.log("THE RES:", res);
       })
       .catch(err => console.log(err));
-  }, [id]);
+  }, []);
 
-  useEffect(() => {
-    axiosWithAuth()
-      .get(`/users/${id}`)
-      .then(res => {
-        SetLoggedInUser({ ...res.data });
-        console.log("user in get/id:", res);
-      })
-      .catch(err => console.log(err));
-  }, [id]);
+  // useEffect(() => {
+  axiosWithAuth()
+    .get(`/users/${id}`)
+    .then(res => {
+      SetLoggedInUser({ ...res.data });
+      console.log("user in get/id:", res);
+    })
+    .catch(err => console.log(err));
+  // }, []);
 
-  return (
-    <div>
-      <Header userProperty={userProperty} loggedInUser={loggedInUser} />
-      <h1>BASHBOARD STARTS HERE</h1>
-    </div>
-  );
+  if (!userProperty) {
+    return <p>Loading...</p>;
+  } else {
+    return (
+      <UserContext.Provider value={{ userProperty, loggedInUser }}>
+        <div>
+          <Route path="/Dashboard" component={Header} />
+          <Route
+            path="/Dashboard/Home"
+            render={props => {
+              return <Home {...props} />;
+            }}
+          />
+          <Route
+            path="/Dashboard/addListing"
+            render={props => {
+              return <AddListing {...props} />;
+            }}
+          />
+          <Route
+            path="/Dashboard/EditListing"
+            render={props => {
+              return <EditListing {...props} />;
+            }}
+          />
+        </div>
+      </UserContext.Provider>
+    );
+  }
 };
 
 export default Dashboard;
