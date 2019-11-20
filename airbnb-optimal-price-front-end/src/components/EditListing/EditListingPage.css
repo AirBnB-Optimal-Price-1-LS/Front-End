@@ -11,7 +11,7 @@
   justify-content: center;
 }
 
-.form {
+.editPageForm {
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -28,6 +28,29 @@
 .amenitiesGroupContainer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  margin-left: 5rem;
+}
+
+.roomTypeContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 5rem;
+}
+
+.regularInputContainer {
+  border: 4px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.regularInputContainer input {
+  margin-bottom: 1rem;
+}
+
+.bedTypeContainer {
+  display: flex;
   flex-direction: column;
   margin-left: 5rem;
 }
