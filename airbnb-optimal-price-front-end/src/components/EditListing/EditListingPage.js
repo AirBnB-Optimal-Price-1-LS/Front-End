@@ -83,21 +83,21 @@ const EditListingPage = props => {
     });
   };
 
-  // useEffect(() => {
-  //   // only set the state if we have data from the api
-  //   // Solves refresh race condition
-  //   if (userProperty.length > 0) {
-  //     const newProperty = userProperty.find(
-  //       item => `${item.id}` === props.match.params.id
-  //     );
-  //     setRadioType(newProperty);
-  //   }
-  // }, [userProperty, props.match.params.id]);
+  useEffect(() => {
+    // only set the state if we have data from the api
+    // Solves refresh race condition
+    if (userProperty.length > 0) {
+      const newProperty = userProperty.find(
+        item => `${item.id}` === props.match.params.id
+      );
+      setRadioType(newProperty);
+    }
+  }, [userProperty, props.match.params.id]);
 
   const addListing = e => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`/property/${(window.localStorage.getItem("userId"), radioType)}`)
+      .put(`/property/${props.match.params.id}`, radioType)
       .then(res => console.log(res))
       .catch(err => console.log(err));
     props.history.push("/Dashboard/Home");
