@@ -1,0 +1,9 @@
+.Header-Container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  align-items: baseline;
+  background-color: #ff5a5f;
+  color: white;
+}

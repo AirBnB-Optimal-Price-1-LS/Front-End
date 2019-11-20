@@ -1,0 +1,37 @@
+.cardStorage {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cardContainer {
+  margin: auto;
+  width: 20rem;
+  height: 20rem;
+  margin-bottom: 2rem;
+  margin-left: 3rem;
+
+  color: black;
+}
+/* .cardContainer h3 {
+} */
+
+.topHalf {
+  margin: 0px;
+  background-color: #484848;
+  height: 12.5rem;
+  color: white;
+  padding-top: 0.3rem;
+}
+
+.bottomHalf {
+  height: 6rem;
+  border-bottom: 0.5px solid black;
+  border-left: 0.5px solid black;
+  border-right: 0.5px solid black;
+}
+
+.Btn {
+  height: 3rem;
+  width: 7rem;
+  margin: 0.5rem;
+  margin-top: 1.5rem;
+}
