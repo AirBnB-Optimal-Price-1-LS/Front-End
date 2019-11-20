@@ -1,43 +1,106 @@
-.login p {
-  font-size: 10px;
-  line-height: 0px;
-}
-
 .login {
-  width: 25%;
-  margin: auto;
-  border: 2px solid black;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.login h1 {
+  color: #ff5a5f;
+  margin-top: 64px;
+}
+
+.flex-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  flex-direction: column;
-  margin-top: 15rem;
-  background-color: white;
+  height: 80vh;
 }
 
-.login-btn {
-  width: 150px;
-  height: 40px;
-  margin-bottom: 0.5rem;
-  background: lightskyblue;
+.svg {
+  width: 65%;
 }
 
-.regis-container {
-  border: 2px solid green;
+.form {
+  width: 35%;
+  padding-left: 64px;
+  align-self: top;
+}
+
+.form label {
+  display: inline-block;
+  width: 90%;
+  margin: 0;
+  background: #fff;
+  padding: 12px;
+}
+
+.form input {
+  width: 90%;
+  padding: 0;
+  border: none;
+  padding: 12px;
+}
+
+.form div:last-child {
+}
+
+.form button {
+  border: none;
+  border-radius: 32px;
+  margin-right: 32px;
+  padding: 16px 32px;
+}
+
+.form button {
+  background: #ff5a5f;
+  color: #fff;
+  box-shadow: 0px 8px 15px rgba(124, 124, 124, 0.1);
+  margin-bottom: 32px;
+}
+
+.form a button {
+  background: #fff;
+  color: #222;
+}
+
+.input-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 0px;
-  line-height: 0px;
 }
 
-.ul {
-  list-style-type: none;
-  padding: 0px;
-  font-size: 10px;
+.input-container:nth-child(1) label {
+  border-radius: 0 10px 0 0;
 }
 
-.login-btn {
-  margin-top: 2rem;
+.input-container:nth-child(2) input {
+  border-radius: 0 0 10px 0;
+}
+
+.input-container .md {
+  color: #ddd;
+  font-size: 2rem;
+  background: #fff;
+  padding: 18px;
+}
+
+.input-container:nth-child(1) .md {
+  color: #ddd;
+  font-size: 2rem;
+  background: #fff;
+  padding: 26px;
+  border-radius: 10px 0 0 0;
+}
+
+.input-container:nth-child(2) .md {
+  color: #ddd;
+  font-size: 2rem;
+  background: #fff;
+  padding: 26px;
+  border-radius: 0 0 0 10px;
+}
+
+.input-container:nth-child(2) {
+  margin-bottom: 32px;
+}
+
+.input-field {
+  width: 95%;
 }

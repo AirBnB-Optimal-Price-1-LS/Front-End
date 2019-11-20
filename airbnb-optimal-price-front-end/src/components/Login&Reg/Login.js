@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
-import { NavLink } from "react-router-dom";
-import "./login.css";
+import "./Login.css";
+import SVG from '../../images/undraw_adventure_4hum.svg';
 
 const Schema = Yup.object().shape({
   username: Yup.string()
@@ -35,32 +36,48 @@ const Login = props => {
   
   return (
     <div className="login">
-      <h1>Login</h1>
-      <Formik
-        initialValues={{
-            username: '',
-            password: ''
-        }}
-        validationSchema={Schema}
-        onSubmit={(values, tools) =>{
-            submit(values, tools);
-        }}
-        >
-            {({errors, touched, isSubmitting, handleSubmit}) => 
-                <Form onSubmit={handleSubmit}>
-                    <p>Username:</p>
-                    <Field type='text' name='username' placeholder='username'/>
-                    {errors.username && touched.username ? <div style={{color: 'red'}}>{errors.username}</div> : null}
-                    <p>Password:</p>
-                    <Field type='password' name='password' placeholder='password'/>
-                    {errors.password && touched.password ? <div style={{color: 'red'}}>{errors.password}</div> : null}
-                    <div>
-                        <button type='submit' disabled={isSubmitting}>Submit</button>
-                        <Link to='/register'><button>Register</button></Link>
-                    </div>
-                </Form>
-            }
-        </Formik>
+      <h1><ion-icon name="pin"></ion-icon>Airbnb Optimal Price</h1>
+      <div className='flex-container'>
+        <img src={SVG} alt='illustration' className='svg'/>
+        <div className='form'>
+          <h2>Login</h2>
+          <Formik
+            initialValues={{
+                username: '',
+                password: ''
+            }}
+            validationSchema={Schema}
+            onSubmit={(values, tools) =>{
+                submit(values, tools);
+            }}
+            >
+                {({errors, touched, isSubmitting, handleSubmit}) => 
+                    <Form onSubmit={handleSubmit}>
+                        <div className='input-container'>
+                          <ion-icon name="person"></ion-icon>
+                          <div className='input-field'>
+                            <label htmlFor='username'>Username</label>
+                            <Field id='username' type='text' name='username' placeholder=''/>
+                          </div>
+                        </div>
+                        <div className='input-container'>
+                          <ion-icon name="lock"></ion-icon>
+                          <div className='input-field'>
+                            <label htmlFor='password'>Password</label>
+                            <Field id='password' type='password' name='password' placeholder=''/>
+                          </div>
+                        </div>
+                        <div>
+                            <button type='submit' disabled={isSubmitting}>Submit</button>
+                            <Link to='/register'><button>Register</button></Link>
+                        </div>
+                        {errors.username && touched.username ? <div style={{color: 'red'}}>{errors.username}</div> : null}
+                        {errors.password && touched.password ? <div style={{color: 'red'}}>{errors.password}</div> : null}
+                    </Form>
+                }
+            </Formik>
+        </div>
+      </div>
     </div>
   );
 };
