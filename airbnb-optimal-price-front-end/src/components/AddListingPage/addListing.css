@@ -2,3 +2,54 @@
   display: flex;
   flex-direction: column;
 }
+
+.property{
+    margin:0 auto;
+    display:flex;
+    max-width:500px;
+    width:100%;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items: center;
+}
+
+form{
+  text-align:center;
+  max-width:300px;
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+}
+
+label{
+  margin:5px 0;
+  width:100%;
+}
+
+label input{
+  width:80%;
+  padding:10px 10px;
+}
+
+label select{
+  padding:10px 10px;
+}
+
+button{
+  margin-top:20px;
+  width:100%;
+  background-color:#FF5A5F;
+  padding:10px 20px;
+  font-size:16px;
+  font-weight:bold;
+  color:white;
+  border:none;
+  border-radius:10px;
+  width:300px;
+}
+
+.selecting{
+  font-size:14px;
+  border:none;
+}

@@ -63,7 +63,7 @@ function AddListing(props){
   // }
 
   return (
-    <div>
+    <div className="property">
       {/* {
         amenitiesList.map(item => {
           return(
@@ -91,39 +91,71 @@ function AddListing(props){
 
       } */}
 
-      <h1>Let's optimize your Airbnb listing!</h1>
-      <h3>What kind of space do you have?</h3>
+      <h1>Optimize Your Airbnb Space</h1>
       <form onSubmit={addListing}>
-        <label> Number of bedrooms
+        <label> 
           <input 
             type="number"
             name="bedrooms"
             value={property.bedrooms || ''}
             onChange={handleChange}
             min="0"
+            placeholder="Number of bedrooms"
           />
         </label> 
-        <label> Number of bathrooms
+        <label>
           <input 
             type="number"
             name="bathrooms"
-            value={property.bathrooms}
+            value={property.bathrooms || ''}
             onChange={handleChange}
             min="0"
+            placeholder="Number of bathrooms"
           />
         </label> 
-        <label> Number of beds
+        <label>
           <input 
             type="number"
             name="beds"
-            value={property.beds}
+            value={property.beds || ''} 
             onChange={handleChange}
             min="0"
+            placeholder="Number of beds"
           />
         </label> 
-        <label> Type of bed(s)
-           <select name="bed_type" value={property.bed_type} onChange={handleChange}>
-            <option value="none">Select Bed Type</option>
+        <label> 
+          <input 
+            type="number"
+            name="security_deposit"
+            value={property.security_deposit || ''}
+            onChange={handleChange}
+            min="0"
+            placeholder="Security deposit"
+          />
+        </label> 
+        <label> 
+          <input 
+            type="number"
+            name="cleaning_fee"
+            value={property.cleaning_fee || ''}
+            onChange={handleChange}
+            min="0"
+            placeholder="Cleaning fee"
+          />
+        </label> 
+        <label>
+          <input 
+            type="number"
+            name="minimum_nights"
+            value={property.minimum_nights || ''}
+            onChange={handleChange}
+            min="0"
+            placeholder="Minimum number of nights"
+          />
+        </label> 
+        <label> 
+           <select className="selecting" name="bed_type" value={property.bed_type} onChange={handleChange}>
+            <option value="none">What type of bed(s) do you offer?</option>
             <option value="Airbed">Airbed</option>
             <option value="Couch">Couch</option>
             <option value="Futon">Futon</option>
@@ -131,36 +163,9 @@ function AddListing(props){
             <option value="Real Bed">Real Bed</option>
           </select>
         </label> 
-        <label> Security deposit
-          <input 
-            type="number"
-            name="security_deposit"
-            value={property.security_deposit}
-            onChange={handleChange}
-            min="0"
-          />
-        </label> 
-        <label> Cleaning fee
-          <input 
-            type="number"
-            name="cleaning_fee"
-            value={property.cleaning_fee}
-            onChange={handleChange}
-            min="0"
-          />
-        </label> 
-        <label> Minimum number of nights
-          <input 
-            type="number"
-            name="minimum_nights"
-            value={property.minimum_nights}
-            onChange={handleChange}
-            min="0"
-          />
-        </label> 
-        <label> Where is your property?
-          <select name="neighbourhood_group_cleansed" value={property.neighbourhood_group_cleansed} onChange={handleChange}>
-            <option value="none">Select Neighbourhood</option>
+        <label> 
+          <select className="selecting" name="neighbourhood_group_cleansed" value={property.neighbourhood_group_cleansed} onChange={handleChange}>
+            <option value="none">Where is your property?</option>
             <option value="Spandau">Spandau</option>
             <option value="Marzahn - Hellersdorf">Marzahn - Hellersdorf</option>
             <option value="Steglitz - Zehlendorf">Steglitz - Zehlendorf</option>
@@ -174,9 +179,9 @@ function AddListing(props){
             <option value="Friedrichshain-Kreuzberg">Friedrichshain-Kreuzberg</option>
           </select>
         </label> 
-        <label> What type of room?
-          <select name="room_type" value={property.room_type} onChange={handleChange}>
-            <option value="none">Select Room Type</option>
+        <label> 
+          <select className="selecting" name="room_type" value={property.room_type} onChange={handleChange}>
+            <option value="none">What kind of room(s) do you offer?</option>
             <option value="Private room">Private room</option>
             <option value="Entire home/apt">Entire home/apt</option>
             <option value="Shared room">Shared room</option>
@@ -184,7 +189,7 @@ function AddListing(props){
         </label> 
 
       </form>
-      <button onClick={addListing}>SUBMIT</button>
+      <button onClick={addListing}>Submit</button>
     </div>
   );
 }
