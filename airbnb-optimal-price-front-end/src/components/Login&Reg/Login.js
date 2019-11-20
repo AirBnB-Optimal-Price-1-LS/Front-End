@@ -1,10 +1,18 @@
 //node modules
 import React, { useState } from "react";
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import "./login.css";
 
-import LoginForm from "./formik/LoginForm";
+const Schema = Yup.object().shape({
+  username: Yup.string()
+      .required('Enter your username'),
+  password: Yup.string()
+      .required('Enter your password')
+});
 
 const Login = props => {
   //state
@@ -12,40 +20,51 @@ const Login = props => {
     username: '',
     password: ''
   });
+
+  const submit = (values, tools) => {
+    console.log(values, tools);
+        axiosWithAuth().post('/auth/login', values)
+        .then(res => {
+            console.log(res);
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('userId', res.data.user_id);
+
+        })
+        .catch(err => console.log(err));
+        tools.resetForm();
+        props.history.push('/dashboard');
+}
   
   return (
     <div className="login">
       <h1>Login</h1>
-      <LoginForm />
+      <Formik
+        initialValues={{
+            username: '',
+            password: ''
+        }}
+        validationSchema={Schema}
+        onSubmit={(values, tools) =>{
+            submit(values, tools);
+        }}
+        >
+            {({errors, touched, isSubmitting, handleSubmit}) => 
+                <Form onSubmit={handleSubmit}>
+                    <p>Username:</p>
+                    <Field type='text' name='username' placeholder='username'/>
+                    {errors.username && touched.username ? <div style={{color: 'red'}}>{errors.username}</div> : null}
+                    <p>Password:</p>
+                    <Field type='password' name='password' placeholder='password'/>
+                    {errors.password && touched.password ? <div style={{color: 'red'}}>{errors.password}</div> : null}
+                    <div>
+                        <button type='submit' disabled={isSubmitting}>Submit</button>
+                        <Link to='/register'><button>Register</button></Link>
+                    </div>
+                </Form>
+            }
+        </Formik>
     </div>
   );
 };
 
 export default Login;
-
-
-
-
-
-
-//  //helper functions
-//  const handleChange = e => {
-//   console.log(e.target.value);
-//   setCredentials({
-//     ...credentials,
-//     [e.target.name]: e.target.value
-//   });
-// };
-
-// const login = e => {
-//   e.preventDefault();
-//   axiosWithAuth()
-//     .post("/auth/login", credentials)
-//     .then(res => {
-//       //set token
-//       localStorage.setItem("token", res.data.token);
-//       //redirect
-//       props.history.push("/protected");
-//     })
-//     .catch(err => console.log(err));
-// };

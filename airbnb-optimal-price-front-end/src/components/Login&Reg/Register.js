@@ -1,12 +1,22 @@
+//node modules
 import React, { useState } from "react";
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 import axios from "axios";
 import "./login.css";
 
-import RegisterForm from './formik/RegisterForm';
+const Schema = Yup.object().shape({
+  username: Yup.string()
+      .required('Enter your username'),
+  password: Yup.string()
+      .required('Enter your password')
+});
 
-const Register = () => {
-  const [credentials, setCredentials] = useState({
+const Register = (props) => {
+  //state
+  const [registerData, setRegisterData] = useState({
     username: '',
     password: ''
   });
@@ -14,7 +24,36 @@ const Register = () => {
   return (
     <div className="login">
       <h1>Register</h1>
-      <RegisterForm />
+      <Formik
+        initialValues={{
+            username: '',
+            password: ''
+        }}
+        validationSchema={Schema}
+        onSubmit={(values, tools) =>{
+            console.log(values);
+            axios.post('https://buildweek-airbnb.herokuapp.com/api/auth/register', values)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+            tools.resetForm();
+            props.history.push('/login');
+        }}
+        >
+            {({errors, touched, isSubmitting}) => 
+                <Form>
+                    <p>Username:</p>
+                    <Field type='text' name='username' placeholder='username'/>
+                    {errors.username && touched.username ? <div style={{color: 'red'}}>{errors.username}</div> : null}
+                    <p>Password:</p>
+                    <Field type='password' name='password' placeholder='password'/>
+                    {errors.password && touched.password ? <div style={{color: 'red'}}>{errors.password}</div> : null}
+                    <div>
+                        <button type='submit' disabled={isSubmitting}>Submit</button>
+                        <Link to='/login'><button>Login</button></Link>
+                    </div>
+                </Form>
+            }
+        </Formik>
     </div>
   );
 };

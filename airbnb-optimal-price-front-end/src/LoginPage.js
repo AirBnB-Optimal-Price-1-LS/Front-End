@@ -15,9 +15,8 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Redirect from="/" to="login" />
+        <Route exact path="/login" render={props => <Login {...props}/>} />
+        <Route exact path="/register" render={props => <Register {...props}/>} />
       </Switch>
       <PrivateRoute path="/protected" component={() => <InitialPage />} />
     </div>
