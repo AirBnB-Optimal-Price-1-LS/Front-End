@@ -3,7 +3,11 @@ import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
 import "./addListing.css";
 
-function AddListing(props) {
+
+function AddListing(props){
+  let id = parseInt(localStorage.getItem('userId'))
+  console.log(id)
+  
   const [property, setProperty] = useState({
     bedrooms: 0,
     bathrooms: 0,
@@ -25,34 +29,25 @@ function AddListing(props) {
     console.log(event.target.value);
   };
 
-  const addListing = event => {
+
+
+
+
+const addListing = event => {
     event.preventDefault();
-    console.log(property);
-    console.log(
-      `https://airbnb-prediction-api.herokuapp.com/?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}`
-    );
-    // props.history.push("/Dashboard/Home");
+    console.log(property)
+    axios.get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}`)
+     .then(response => {
+          console.log(response.data)
+          // axios.post(`https://buildweek-airbnb.herokuapp.com/api/users/${id}/property`, response.data)
+          // props.history.push('/Dashboard')
+     })
+     .catch(error => {
+          console.log(error)
+     })
   };
-  // const addListing = (event, property) => {
-  //   event.preventDefault();
-  //   console.log(property)
-  //   axios.get( `https://airbnb-prediction-api.herokuapp.com/?bedrooms={property.bedrooms}&
-  //         bathrooms={property.bathrooms}&
-  //         beds={property.beds}&
-  //         bed_type={property.bed_type}&
-  //         security_deposit={property.security_deposit}&
-  //         cleaning_fee={property.cleaning_fee}&
-  //         minimum_nights={property.minimum_nights}&
-  //         room_type={property.room_type}&
-  //         neighbourhood_group_cleansed={property.neighbourhood_group_cleansed}&
-  //         room_amenities={property.amenities}`)
-  //    .then(response => {
-  //         console.log(response.data)
-  //         axios.post('')
-  //         props.history.push('/dashboard')
-  //    })
-  props.history.push("/Dashboard/Home");
-  // };
+
+   
 
   return (
     <div className="property">
@@ -129,8 +124,8 @@ function AddListing(props) {
             <option value="Airbed">Airbed</option>
             <option value="Couch">Couch</option>
             <option value="Futon">Futon</option>
-            <option value="Pull-out_Sofa">Pull-out Sofa</option>
-            <option value="Real_Bed">Real Bed</option>
+            <option value="Pull-outSofa">Pull-out Sofa</option>
+            <option value="RealBed">Real Bed</option>
           </select>
         </label>
         <label>
@@ -164,9 +159,9 @@ function AddListing(props) {
             onChange={handleChange}
           >
             <option value="none">What kind of room(s) do you offer?</option>
-            <option value="Private_room">Private room</option>
-            <option value="Entire_home/apt">Entire home/apt</option>
-            <option value="Shared_room">Shared room</option>
+            <option value="Privateroom">Private room</option>
+            <option value="Entirehome/apt">Entire home/apt</option>
+            <option value="Sharedroom">Shared room</option>
           </select>
         </label>
       </form>
