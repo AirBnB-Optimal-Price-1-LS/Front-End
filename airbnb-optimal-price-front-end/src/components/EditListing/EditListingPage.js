@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 // import { UserContext } from "../../contexts/UserContext";
 
-const EditListing = props => {
+const EditListingPage = props => {
   //   const { userProperty, loggedInUser } = useContext(UserContext);
   //   console.log("Edit FORM:", loggedInUser);
 
@@ -22,4 +22,4 @@ const EditListing = props => {
   );
 };
 
-export default EditListing;
+export default EditListingPage;

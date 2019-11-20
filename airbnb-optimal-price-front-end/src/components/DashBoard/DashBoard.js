@@ -13,7 +13,7 @@ import "./DashBoard.css";
 //components
 import Header from "./Header";
 import AddListing from "../../components/AddListingPage/AddListing";
-import EditListing from "../../components/EditListing/EditListing";
+import EditListingPage from "../EditListing/EditListingPage";
 import Home from "../../components/HomePage/Home";
 
 const id = window.localStorage.getItem("userId");
@@ -100,19 +100,19 @@ const Dashboard = props => {
   const [loggedInUser, SetLoggedInUser] = useState([]);
   console.log("users Properties:", userProperty);
 
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`/users/${id}/property`)
-  //     .then(res => {
-  //       setUserProperty([...userProperty, ...res.data]);
-  //       console.log("THE RES:", res);
-  //     })
-  //     .catch(err => console.log(err));
-  // }, []);
-
   useEffect(() => {
-    setUserProperty([...init]);
+    axiosWithAuth()
+      .get(`/users/${id}/property`)
+      .then(res => {
+        setUserProperty([...userProperty, ...res.data]);
+        console.log("THE RES:", res);
+      })
+      .catch(err => console.log(err));
   }, []);
+
+  // useEffect(() => {
+  //   setUserProperty([...init]);
+  // }, []);
 
   useEffect(() => {
     axiosWithAuth()
@@ -146,7 +146,7 @@ const Dashboard = props => {
           <Route
             path="/Dashboard/EditListing"
             render={props => {
-              return <EditListing {...props} />;
+              return <EditListingPage {...props} />;
             }}
           />
         </div>
