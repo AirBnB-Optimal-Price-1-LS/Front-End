@@ -3,7 +3,7 @@ import PropertyCard from "../PropertyCard/PropertyCard";
 
 const PropertyCardList = props => {
   return (
-    <div className="cardStorage">
+    <div className="card-storage">
       {props.userProperty.map(property => (
         <PropertyCard
           key={property.id}

@@ -3,11 +3,16 @@
   display: inline-block;
   margin: 16px;
   border-radius: 16px;
+  min-width: 380px;
 }
 
 .card-container .flex {
   display: flex;
   margin-bottom: 32px;
+}
+
+.card-container .flex h2 {
+  width: 80%;
 }
 
 .edit-buttons {
@@ -44,4 +49,10 @@
 
 .price span {
   font-size: 1rem;
+}
+
+.card-storage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
