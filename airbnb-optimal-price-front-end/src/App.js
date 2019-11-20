@@ -6,33 +6,30 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-// import { axiosWithAuth } from "./axiosWithAuth/axiosWithAuth";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import "./App.css";
 
 //components
 import Login from "./components/Login&Reg/Login";
 import Register from "./components/Login&Reg/Register";
-import InitialPage from "./components/InitialPage/InitialPage";
+import DashBoard from "./components/DashBoard/DashBoard";
 
-const App = () => {
+const App = props => {
   return (
     <div className="App">
       <Router>
         <div className="App">
-          <ul>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </ul>
           <Switch>
-            <Route path="/login" component={Login} />
+            {/* <Route exact path="/" component={<Login />} /> */}
+            <Route
+              path="/login"
+              render={props => {
+                return <Login {...props} />;
+              }}
+            />
             <Route path="/register" component={Register} />
           </Switch>
-          <PrivateRoute path="/protected" component={() => <InitialPage />} />
+          <PrivateRoute path="/Dashboard" component={() => <DashBoard />} />
         </div>
       </Router>
     </div>

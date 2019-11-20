@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
+import { NavLink } from "react-router-dom";
 import "./login.css";
 
 let credential = {
   username: "",
   password: ""
 };
+let loggedUserId = {
+  UserId: 0
+};
 
 const Login = props => {
+  console.log("LOGIN PROPS:", props);
   const [credentials, setCredentials] = useState(credential);
 
   const handleChange = e => {
@@ -26,15 +30,14 @@ const Login = props => {
       .then(res => {
         //set token
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.user_id);
+
         //redirect
-        props.history.push("/protected");
+        props.history.push("/Dashboard/Home");
+        console.log(res);
       })
       .catch(err => console.log(err));
   };
-
-  // const register = () => {
-  //   props.history.push("/register");
-  // };
 
   console.log(credentials);
   return (
