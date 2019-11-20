@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import "./EditListingPage.css";
 
 // let neighbourhood = [
@@ -35,6 +36,7 @@ let radioTypes = {
 const EditListingPage = props => {
   const { userProperty, loggedInUser } = useContext(UserContext);
   // const [addedProperty, setAddedProperty] = useState(intialInput);
+  // const [radioType, setRadioType] = useState([]);
   const [radioType, setRadioType] = useState(radioTypes);
   // console.log("ADD FORM:", addedProperty);
   console.log("EDIT PAGE:", radioType);
@@ -60,49 +62,53 @@ const EditListingPage = props => {
     });
   };
 
-  const handleAmenitiesChange = changeEvent => {
-    console.log(changeEvent.target.checked);
-    const amenities = radioType.amenities;
-    let index;
-    changeEvent.target.checked
-      ? setRadioType({
-          ...radioType,
-          amenities: [...radioType.amenities, changeEvent.target.value]
-        })
-      : (index = amenities.indexOf(+changeEvent.target.value));
-    amenities.splice(index, 1);
-  };
+  // const handleAmenitiesChange = changeEvent => {
+  //   console.log(changeEvent.target.checked);
+  //   const amenities = radioType.amenities;
+  //   let index;
+  //   changeEvent.target.checked
+  //     ? setRadioType({
+  //         ...radioType,
+  //         amenities: [...radioType.amenities, changeEvent.target.value]
+  //       })
+  //     : (index = amenities.indexOf(+changeEvent.target.value));
+  // };
 
   const handleChange = e => {
     let propertyId = props.match.params.id;
     setRadioType({
       ...radioType,
+      id: propertyId,
       [e.target.name]: e.target.value
     });
   };
 
-  useEffect(() => {
-    // only set the state if we have data from the api
-    // Solves refresh race condition
-    if (props.userProperty.length > 0) {
-      const newProperty = props.userProperty.find(
-        item => `${item.id}` === props.match.params.id
-      );
-      setRadioType(newProperty);
-    }
-  }, [props.movies, props.match.params.id]);
+  // useEffect(() => {
+  //   // only set the state if we have data from the api
+  //   // Solves refresh race condition
+  //   if (userProperty.length > 0) {
+  //     const newProperty = userProperty.find(
+  //       item => `${item.id}` === props.match.params.id
+  //     );
+  //     setRadioType(newProperty);
+  //   }
+  // }, [userProperty, props.match.params.id]);
 
   const addListing = e => {
     e.preventDefault();
-
+    axiosWithAuth()
+      .put(`/property/${(window.localStorage.getItem("userId"), radioType)}`)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
     props.history.push("/Dashboard/Home");
   };
+
   return (
     <div className="updateContainer">
       <div className="h1Container">
         <h1>Update Listing</h1>
       </div>
-      <form className="editPageForm" onSubmit={addListing}>
+      <form className="editPageForm" onSubmit={() => addListing}>
         <div className="neighbourhoodGroupContainer">
           <h2>Neighborhood: </h2>
           <label>
@@ -246,7 +252,7 @@ const EditListingPage = props => {
             Friedrichshain-Kreuzberg
           </label>
         </div>
-        <div className="amenitiesGroupContainer">
+        {/* <div className="amenitiesGroupContainer">
           <h2>Amenities:</h2>
           <label>
             <input
@@ -398,7 +404,7 @@ const EditListingPage = props => {
             />
             Free street parking
           </label>
-        </div>
+        </div> */}
         <div className="bedTypeContainer">
           <h2>Bed Type: </h2>
           <label>

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import "./Home.css";
 
 //Components
 import PropertyCardList from "../PropertyCard/PropertyCardList";
@@ -13,7 +14,11 @@ const Home = props => {
   };
   return (
     <div>
-      <button onClick={addListing}>Add Listing</button>
+      <div className="homeBtnContainer">
+        <button className="homeBtn" onClick={addListing}>
+          +
+        </button>
+      </div>
       <h1>HOME</h1>
       <PropertyCardList userProperty={userProperty} history={props.history} />
     </div>
