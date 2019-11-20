@@ -31,10 +31,7 @@ const Login = props => {
         //set token
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userId", res.data.user_id);
-        // props.setLoggedInUserId({
-        //   ...userId,
-        //   UserId: res.data.user_id
-        // });
+
         //redirect
         props.history.push("/Dashboard/Home");
         console.log(res);
