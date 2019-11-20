@@ -1,0 +1,47 @@
+.updateContainer {
+  margin: 0 auto;
+  border: 5px solid black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.h1Container {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 60%;
+}
+
+.neighbourhoodGroupContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.amenitiesGroupContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 5rem;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.editSubmitBtn {
+  width: 100px;
+  height: 40px;
+  background-color: #ff5a5f;
+}
+.editSubmitBtn:hover {
+  background-color: #00a699;
+}
