@@ -13,25 +13,19 @@ import "./App.css";
 import Login from "./components/Login&Reg/Login";
 import Register from "./components/Login&Reg/Register";
 import DashBoard from "./components/DashBoard/DashBoard";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
-const App = props => {
+//styles
+import "./App.css";
+
+const App = () => {
   return (
-    <div className="App">
-      <Router>
-        <div className="App">
-          <Switch>
-            {/* <Route exact path="/" component={<Login />} /> */}
-            <Route
-              path="/login"
-              render={props => {
-                return <Login {...props} />;
-              }}
-            />
-            <Route path="/register" component={Register} />
-          </Switch>
-          <PrivateRoute path="/Dashboard" component={() => <DashBoard />} />
-        </div>
-      </Router>
+    <div className="login-page">
+      <Switch>
+        <Route exact path="/login" render={props => <Login {...props}/>} />
+        <Route exact path="/register" render={props => <Register {...props}/>} />
+      </Switch>
+      <PrivateRoute path="/Dashboard" component={() => <DashBoard />} />
     </div>
   );
 };

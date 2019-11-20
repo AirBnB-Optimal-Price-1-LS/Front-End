@@ -1,71 +1,66 @@
+//node modules
 import React, { useState } from "react";
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import { NavLink } from "react-router-dom";
 import "./login.css";
 
-let credential = {
-  username: "",
-  password: ""
-};
-let loggedUserId = {
-  UserId: 0
-};
+const Schema = Yup.object().shape({
+  username: Yup.string()
+      .required('Enter your username'),
+  password: Yup.string()
+      .required('Enter your password')
+});
 
 const Login = props => {
-  console.log("LOGIN PROPS:", props);
-  const [credentials, setCredentials] = useState(credential);
+  //state
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: ''
+  });
 
-  const handleChange = e => {
-    console.log(e.target.value);
-    setCredentials({
-      ...credentials,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const login = e => {
-    e.preventDefault();
-    axiosWithAuth()
-      .post("/auth/login", credentials)
-      .then(res => {
-        //set token
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userId", res.data.user_id);
-
-        //redirect
-        props.history.push("/Dashboard/Home");
-        console.log(res);
-      })
-      .catch(err => console.log(err));
-  };
-
-  console.log(credentials);
+  const submit = (values, tools) => {
+    console.log(values, tools);
+        axiosWithAuth().post('/auth/login', values)
+        .then(res => {
+            console.log(res);
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('userId', res.data.user_id);
+            props.history.push('/dashboard');
+        })
+        .catch(err => console.log(err));
+}
+  
   return (
     <div className="login">
-      <form onSubmit={login}>
-        <div className="inputs">
-          <p>Username:</p>
-          <input
-            type="text"
-            name="username"
-            placeholder="username"
-            value={credentials.username}
-            onChange={handleChange}
-          />
-          <p>Password:</p>
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            value={credentials.password}
-            onChange={handleChange}
-          />
-        </div>
-        <button className="login-btn">Login</button>
-        <div className="regis-container">
-          <NavLink to="/register">Register</NavLink>
-        </div>
-      </form>
+      <h1>Login</h1>
+      <Formik
+        initialValues={{
+            username: '',
+            password: ''
+        }}
+        validationSchema={Schema}
+        onSubmit={(values, tools) =>{
+            submit(values, tools);
+        }}
+        >
+            {({errors, touched, isSubmitting, handleSubmit}) => 
+                <Form onSubmit={handleSubmit}>
+                    <p>Username:</p>
+                    <Field type='text' name='username' placeholder='username'/>
+                    {errors.username && touched.username ? <div style={{color: 'red'}}>{errors.username}</div> : null}
+                    <p>Password:</p>
+                    <Field type='password' name='password' placeholder='password'/>
+                    {errors.password && touched.password ? <div style={{color: 'red'}}>{errors.password}</div> : null}
+                    <div>
+                        <button type='submit' disabled={isSubmitting}>Submit</button>
+                        <Link to='/register'><button>Register</button></Link>
+                    </div>
+                </Form>
+            }
+        </Formik>
     </div>
   );
 };
