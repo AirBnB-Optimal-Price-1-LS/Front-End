@@ -6,7 +6,6 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import "./App.css";
 
 //components
@@ -20,13 +19,14 @@ import "./App.css";
 
 const App = () => {
   return (
-    <div className="login-page">
+    <>
       <Switch>
         <Route exact path="/login" render={props => <Login {...props}/>} />
         <Route exact path="/register" render={props => <Register {...props}/>} />
+        <Redirect exact from="/" to="login" />
       </Switch>
       <PrivateRoute path="/Dashboard" component={() => <DashBoard />} />
-    </div>
+    </>
   );
 };
 
