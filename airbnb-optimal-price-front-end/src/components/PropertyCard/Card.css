@@ -1,37 +1,47 @@
-.cardStorage {
+.card-container {
+  background: #fff;
+  display: inline-block;
+  margin: 16px;
+  border-radius: 16px;
+}
+
+.card-container .flex {
   display: flex;
-  flex-wrap: wrap;
-}
-.cardContainer {
-  margin: auto;
-  width: 20rem;
-  height: 20rem;
-  margin-bottom: 2rem;
-  margin-left: 3rem;
-
-  color: black;
-}
-/* .cardContainer h3 {
-} */
-
-.topHalf {
-  margin: 0px;
-  background-color: #484848;
-  height: 12.5rem;
-  color: white;
-  padding-top: 0.3rem;
+  margin-bottom: 32px;
 }
 
-.bottomHalf {
-  height: 6rem;
-  border-bottom: 0.5px solid black;
-  border-left: 0.5px solid black;
-  border-right: 0.5px solid black;
+.edit-buttons {
+  width: 20%;
 }
 
-.Btn {
-  height: 3rem;
-  width: 7rem;
-  margin: 0.5rem;
-  margin-top: 1.5rem;
+.edit-buttons ion-icon {
+  display: block;
+  margin-left: auto;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.top-container {
+  color: #fff;
+  padding: 32px;
+  background: rgb(253, 127, 120);
+  background: linear-gradient(180deg, rgba(253, 127, 120, 1) 0%, rgba(255, 144, 148, 1) 100%);
+  border-radius: 16px;
+}
+
+.property-info p {
+  margin: 4px 0px;
+}
+
+.card-container p {
+  text-align: right;
+}
+
+.price {
+  margin: 16px 32px;
+  font-size: 2rem;
+}
+
+.price span {
+  font-size: 1rem;
 }
