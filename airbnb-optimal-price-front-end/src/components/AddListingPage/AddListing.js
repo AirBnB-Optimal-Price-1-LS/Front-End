@@ -29,10 +29,6 @@ function AddListing(props){
     console.log(event.target.value);
   };
 
-
-
-
-
 const addListing = event => {
     event.preventDefault();
     console.log(property)
