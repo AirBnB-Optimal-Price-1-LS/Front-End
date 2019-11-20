@@ -40,7 +40,7 @@ const Login = props => {
       <h1><ion-icon name="pin"></ion-icon>Airbnb Optimal Price</h1>
       <div className='flex-container'>
         <img src={SVG} alt='illustration' className='svg'/>
-        <div className='form'>
+        <div className='form-login'>
           <h2>Login</h2>
           <Formik
             initialValues={{

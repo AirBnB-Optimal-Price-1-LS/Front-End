@@ -18,13 +18,13 @@
   width: 65%;
 }
 
-.form {
+.form-login {
   width: 35%;
   padding-left: 64px;
   align-self: top;
 }
 
-.form label {
+.form-login label {
   display: inline-block;
   width: 90%;
   margin: 0;
@@ -32,30 +32,31 @@
   padding: 12px;
 }
 
-.form input {
+.form-login input {
   width: 90%;
   padding: 0;
   border: none;
   padding: 12px;
 }
 
-.form button {
+.form-login button {
   border: none;
   border-radius: 32px;
   margin-right: 32px;
   padding: 16px 32px;
 }
 
-.form button {
+.form-login button {
   background: #ff5a5f;
   color: #fff;
-  box-shadow: 0px 8px 15px rgba(124, 124, 124, 0.1);
+  box-shadow: 0px 8px 15px rgba(255, 90, 95, 0.1);
   margin-bottom: 32px;
 }
 
-.form a button {
+.form-login a button {
   background: #fff;
   color: #222;
+  box-shadow: 0px 8px 15px rgba(124, 124, 124, 0.1);
 }
 
 .input-container {
