@@ -8,10 +8,12 @@ import PropertyCardList from "../PropertyCard/PropertyCardList";
 const Home = props => {
   const { userProperty, loggedInUser } = useContext(UserContext);
   console.log("IN HOME:", userProperty);
+
   const addListing = e => {
     e.preventDefault();
     props.history.push("/Dashboard/addListing");
   };
+
   return (
     <div>
       <div className="homeBtnContainer">
