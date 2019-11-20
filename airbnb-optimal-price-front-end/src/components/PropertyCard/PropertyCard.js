@@ -4,9 +4,10 @@ import "./Card.css";
 
 const PropertyCard = props => {
   console.log("IN CARD:", props);
+
   const editProperty = e => {
     e.preventDefault();
-    props.history.push("/Dashboard/EditListing");
+    props.history.push(`/Dashboard/EditListing/${props.property.id}`);
   };
 
   const deleteProperty = e => {
