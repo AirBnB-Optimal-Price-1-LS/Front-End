@@ -28,11 +28,9 @@ const Login = props => {
             console.log(res);
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('userId', res.data.user_id);
-
+            props.history.push('/dashboard');
         })
         .catch(err => console.log(err));
-        tools.resetForm();
-        props.history.push('/dashboard');
 }
   
   return (
