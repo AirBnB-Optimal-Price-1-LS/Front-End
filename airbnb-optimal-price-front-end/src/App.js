@@ -6,7 +6,6 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import "./App.css";
 
 //components
