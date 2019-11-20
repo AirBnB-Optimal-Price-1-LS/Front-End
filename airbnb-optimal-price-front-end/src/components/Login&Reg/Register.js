@@ -5,8 +5,9 @@ import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
 import axios from "axios";
-import "./Login.css";
 import SVG from '../../images/undraw_destinations_fpv7.svg';
+
+import './login.css';
 
 const Schema = Yup.object().shape({
   username: Yup.string()
