@@ -9,7 +9,7 @@ import InitialPage from "./components/InitialPage/InitialPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 //styles
-import "./LoginPage.css";
+import "./App.css";
 
 const LoginPage = () => {
   return (
