@@ -18,28 +18,26 @@ import "./EditListingPage.css";
 //   "Friedrichshain-Kreuzberg"
 // ];
 
-// let radioTypes = {
-//   neighbourhood_group_cleansed: "",
-//   amenities: [],
-//   bed_type: [],
-//   room_type: [],
-//   bathrooms: 0,
-//   bedrooms: 0,
-//   beds: 0,
-//   cleaning_fee: 0,
-//   id: 0,
-//   minimum_nights: 1,
-//   security_deposit: 300,
-//   user_id: window.localStorage.getItem("userId")
-// };
+let radioTypes = {
+  neighbourhood_group_cleansed: "",
+  amenities: [],
+  bed_type: [],
+  room_type: [],
+  bathrooms: 0,
+  bedrooms: 0,
+  beds: 0,
+  cleaning_fee: 0,
+  id: 0,
+  minimum_nights: 1,
+  security_deposit: 300,
+  user_id: window.localStorage.getItem("userId")
+};
 
 const EditListingPage = props => {
-  const { userProperty, loggedInUser, setUserProperty } = useContext(
-    UserContext
-  );
+  const { userProperty, loggedInUser } = useContext(UserContext);
   // const [addedProperty, setAddedProperty] = useState(intialInput);
-  const [radioType, setRadioType] = useState([]);
-  // const [radioType, setRadioType] = useState(radioTypes);
+  // const [radioType, setRadioType] = useState([]);
+  const [radioType, setRadioType] = useState(radioTypes);
   // console.log("ADD FORM:", addedProperty);
   console.log("EDIT PAGE:", radioType);
 
@@ -100,10 +98,7 @@ const EditListingPage = props => {
     e.preventDefault();
     axiosWithAuth()
       .put(`/property/${props.match.params.id}`, radioType)
-      .then(res => {
-        console.log(res);
-        // setUserProperty()
-      })
+      .then(res => console.log(res))
       .catch(err => console.log(err));
     props.history.push("/Dashboard/Home");
   };
@@ -509,7 +504,7 @@ const EditListingPage = props => {
             Bathrooms:
             <input
               type="text"
-              placeholder="How Many Bathrooms?"
+              placeholder=""
               name="bathrooms"
               value={radioType.bathrooms}
               onChange={handleChange}

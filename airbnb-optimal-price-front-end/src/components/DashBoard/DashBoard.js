@@ -107,10 +107,8 @@ const Dashboard = props => {
         setUserProperty([...userProperty, ...res.data]);
         console.log("THE RES:", res);
       })
-      .then(res => console.log("LOGGING IN...:", res))
-      // .then(res => console.log("RESPONSE:", res))
       .catch(err => console.log(err));
-  }, [id]);
+  }, []);
 
   // useEffect(() => {
   //   setUserProperty([...init]);
@@ -123,7 +121,6 @@ const Dashboard = props => {
         SetLoggedInUser({ ...res.data });
         console.log("user in get/id:", res);
       })
-
       .catch(err => console.log(err));
   }, []);
 
@@ -131,9 +128,7 @@ const Dashboard = props => {
     return <p>Loading...</p>;
   } else {
     return (
-      <UserContext.Provider
-        value={{ userProperty, loggedInUser, setUserProperty }}
-      >
+      <UserContext.Provider value={{ userProperty, loggedInUser }}>
         <div className="mainContainer">
           <Route path="/Dashboard" component={Header} />
           <Route
