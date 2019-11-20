@@ -2,31 +2,34 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import "./EditListingPage.css";
 
-// const intialInput = {
-//   id: 1,
-//   minimum_nights: 0,
-//   name: "Kevin's house",
-//   neighborhood: "Santa Barbara",
-//   neighborhood_group: "Downtown SB",
-//   room_type: "Entire house/apt",
-//   user_id: 1
-// };
+// let neighbourhood = [
+//   "Spandau",
+//   "Marzahn - Hellersdorf",
+//   "Reinickendorf",
+//   "Steglitz - Zehlendorf",
+//   "Treptow - Köpenick",
+//   "Lichtenberg",
+//   "Tempelhof - Schöneberg",
+//   "Charlottenburg-Wilm.",
+//   "Neukölln",
+//   "Pankow",
+//   "Mitte",
+//   "Friedrichshain-Kreuzberg"
+// ];
 
 let radioTypes = {
   neighbourhood_group_cleansed: "",
-  amenities: []
-  // amenities: ["Lock on bedroom door", "Laptop friendly workspace"],
-  // bathrooms: 3,
-  // bed_type: "Real Bed",
-  // bedrooms: 3,
-  // beds: 3,
-  // cleaning_fee: 25,
-  // id: 4,
-  // minimum_nights: 1,
-  // neighbourhood_group_cleansed: "Charlottenburg-Wilm",
-  // room_type: "Entire home/apt",
-  // security_deposit: 300,
-  // user_id: 3
+  amenities: [],
+  bed_type: [],
+  room_type: [],
+  bathrooms: 0,
+  bedrooms: 0,
+  beds: 0,
+  cleaning_fee: 0,
+  id: 0,
+  minimum_nights: 1,
+  security_deposit: 300,
+  user_id: window.localStorage.getItem("userId")
 };
 
 const EditListingPage = props => {
@@ -36,14 +39,27 @@ const EditListingPage = props => {
   // console.log("ADD FORM:", addedProperty);
   console.log("EDIT PAGE:", radioType);
 
-  const handleChange = e => {};
-
   const handleNeighbourhoodChange = changeEvent => {
     setRadioType({
       ...radioType,
       neighbourhood_group_cleansed: changeEvent.target.value
     });
   };
+
+  const handleBedTypeChange = changeEvent => {
+    setRadioType({
+      ...radioType,
+      bed_type: changeEvent.target.value
+    });
+  };
+
+  const handleRoomChange = changeEvent => {
+    setRadioType({
+      ...radioType,
+      room_type: changeEvent.target.value
+    });
+  };
+
   const handleAmenitiesChange = changeEvent => {
     console.log(changeEvent.target.checked);
     const amenities = radioType.amenities;
@@ -55,6 +71,14 @@ const EditListingPage = props => {
         })
       : (index = amenities.indexOf(+changeEvent.target.value));
     amenities.splice(index, 1);
+  };
+
+  const handleChange = e => {
+    let propertyId = props.match.params.id;
+    setRadioType({
+      ...radioType,
+      [e.target.name]: e.target.value
+    });
   };
 
   useEffect(() => {
@@ -78,7 +102,7 @@ const EditListingPage = props => {
       <div className="h1Container">
         <h1>Update Listing</h1>
       </div>
-      <form className="form" onSubmit={addListing}>
+      <form className="editPageForm" onSubmit={addListing}>
         <div className="neighbourhoodGroupContainer">
           <h2>Neighborhood: </h2>
           <label>
@@ -373,6 +397,162 @@ const EditListingPage = props => {
               className="form-check-input"
             />
             Free street parking
+          </label>
+        </div>
+        <div className="bedTypeContainer">
+          <h2>Bed Type: </h2>
+          <label>
+            <input
+              type="radio"
+              name="bed_type"
+              value="Airbed"
+              checked={radioType.bed_type === "Airbed"}
+              onChange={handleBedTypeChange}
+              className="form-check-input"
+            />
+            Airbed
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="bed_type"
+              value="Futon"
+              checked={radioType.bed_type === "Futon"}
+              onChange={handleBedTypeChange}
+              className="form-check-input"
+            />
+            Futon
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="bed_type"
+              value="Couch"
+              checked={radioType.bed_type === "Couch"}
+              onChange={handleBedTypeChange}
+              className="form-check-input"
+            />
+            Couch
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="bed_type"
+              value="Pull-out Sofa"
+              checked={radioType.bed_type === "Pull-out Sofa"}
+              onChange={handleBedTypeChange}
+              className="form-check-input"
+            />
+            Pull-out Sofa
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="bed_type"
+              value="Real Bed"
+              checked={radioType.bed_type === "Real Bed"}
+              onChange={handleBedTypeChange}
+              className="form-check-input"
+            />
+            Real Bed
+          </label>
+        </div>
+        <div className="roomTypeContainer">
+          <h2>Room Type: </h2>
+          <label>
+            <input
+              type="radio"
+              name="room_type"
+              value="Private room"
+              checked={radioType.room_type === "Private room"}
+              onChange={handleRoomChange}
+              className="form-check-input"
+            />
+            Private room
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="room_type"
+              value="Entire home/apt"
+              checked={radioType.room_type === "Entire home/apt"}
+              onChange={handleRoomChange}
+              className="form-check-input"
+            />
+            Entire home/apt
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="room_type"
+              value="Shared room"
+              checked={radioType.room_type === "Shared room"}
+              onChange={handleRoomChange}
+              className="form-check-input"
+            />
+            Shared room
+          </label>
+        </div>
+        <div className="regularInputContainer">
+          <label>
+            Bathrooms:
+            <input
+              type="text"
+              placeholder=""
+              name="bathrooms"
+              value={radioType.bathrooms}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Bedrooms:
+            <input
+              type="text"
+              placeholder="How many Bedrooms?"
+              name="bedrooms"
+              value={radioType.bedrooms}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Beds:
+            <input
+              type="text"
+              placeholder="How many beds?"
+              name="beds"
+              value={radioType.beds}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Cleaning Fee:
+            <input
+              type="text"
+              placeholder="Cleaning Fee?"
+              name="cleaning_fee"
+              value={radioType.cleaning_fee}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Minimum Nights:
+            <input
+              type="text"
+              placeholder="Minimum Night?"
+              name="minimum_nights"
+              value={radioType.minimum_nights}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Security Deposit:
+            <input
+              type="text"
+              placeholder="Security Deposit?"
+              name="security_deposit"
+              value={radioType.security_deposit}
+              onChange={handleChange}
+            />
           </label>
         </div>
       </form>
