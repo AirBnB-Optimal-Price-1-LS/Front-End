@@ -14,3 +14,14 @@
   background-size: cover; */
 }
 
+.welcomeLogo{
+  height:25px;
+  margin-right:3px;
+}
+.welcomeSign{
+  display:flex;
+  justify-content:center;
+}
+
+
+
