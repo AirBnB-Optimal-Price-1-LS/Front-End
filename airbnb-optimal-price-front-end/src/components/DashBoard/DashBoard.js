@@ -17,71 +17,6 @@ import Home from "../../components/HomePage/Home";
 
 const id = window.localStorage.getItem("userId");
 
-let init = [
-  {
-    id: 1,
-    minimum_nights: 2,
-    name: "Kevin's house",
-    neighborhood: "Santa Barbara",
-    neighborhood_group: "Downtown SB",
-    room_type: "Entire house/apt",
-    user_id: 1
-  },
-  {
-    id: 2,
-    minimum_nights: 2,
-    name: "Kevin's house",
-    neighborhood: "Santa Barbara",
-    neighborhood_group: "Downtown SB",
-    room_type: "Entire house/apt",
-    user_id: 1
-  },
-  {
-    id: 3,
-    minimum_nights: 2,
-    name: "Kevin's house",
-    neighborhood: "Santa Barbara",
-    neighborhood_group: "Downtown SB",
-    room_type: "Entire house/apt",
-    user_id: 1
-  },
-  {
-    id: 4,
-    minimum_nights: 2,
-    name: "Kevin's house",
-    neighborhood: "Santa Barbara",
-    neighborhood_group: "Downtown SB",
-    room_type: "Entire house/apt",
-    user_id: 1
-  },
-  {
-    id: 5,
-    minimum_nights: 2,
-    name: "Kevin's house",
-    neighborhood: "Santa Barbara",
-    neighborhood_group: "Downtown SB",
-    room_type: "Entire house/apt",
-    user_id: 1
-  },
-  {
-    id: 6,
-    minimum_nights: 2,
-    name: "Kevin's house",
-    neighborhood: "Santa Barbara",
-    neighborhood_group: "Downtown SB",
-    room_type: "Entire house/apt",
-    user_id: 1
-  },
-  {
-    id: 7,
-    minimum_nights: 2,
-    name: "Kevin's house",
-    neighborhood: "Santa Barbara",
-    neighborhood_group: "Downtown SB",
-    room_type: "Entire house/apt",
-    user_id: 1
-  }
-];
 
 const Dashboard = props => {
   console.log("DB PROPS:", props);
@@ -109,6 +44,8 @@ const Dashboard = props => {
       .then(res => console.log("LOGGING IN...:", res))
       .catch(err => console.log(err));
   }, [props.userId]);
+
+  
 
   // useEffect(() => {
   //   setUserProperty([...init]);
