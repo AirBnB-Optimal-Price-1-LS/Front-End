@@ -59,6 +59,10 @@ function AddListing(props) {
       });
   };
 
+  const cancel = () => {
+    props.history.push("/Dashboard/Home");
+  };
+
   return (
     <div className="property">
       <h1>Optimize Your Airbnb Space</h1>
@@ -176,6 +180,7 @@ function AddListing(props) {
         </label>
       </form>
       <button onClick={addListing}>Submit</button>
+      <button onClick={cancel}>Cancel</button>
     </div>
   );
 }

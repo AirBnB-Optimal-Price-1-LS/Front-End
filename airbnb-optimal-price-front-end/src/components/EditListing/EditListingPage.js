@@ -75,9 +75,13 @@ const EditListing = props => {
       });
   };
 
+  const cancel = () => {
+    props.history.push("/Dashboard/Home");
+  };
+
   return (
     <div className="property">
-      <h1>Optimize Your Airbnb Space</h1>
+      <h1>Update Your Airbnb Space</h1>
       <form onSubmit={addListing}>
         <label>
           <input
@@ -192,6 +196,7 @@ const EditListing = props => {
         </label>
       </form>
       <button onClick={addListing}>Submit</button>
+      <button onClick={cancel}>Cancel</button>
     </div>
   );
 };
