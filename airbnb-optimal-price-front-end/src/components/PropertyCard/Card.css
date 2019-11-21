@@ -57,9 +57,9 @@
   transition: all 0.1s ease-in-out;
 }
 
-.edit-buttons ion-icon:hover {
+/* .edit-buttons ion-icon:hover {
   color: #00a699;
-}
+} */
 
 .edit-buttons ion-icon:hover {
   transition-timing-function: ease-in;

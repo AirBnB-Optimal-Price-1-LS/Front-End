@@ -11,6 +11,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-bottom:100px;
 }
 
 .property form {
@@ -30,9 +31,11 @@
 .property label input {
   width: 80%;
   padding: 10px 10px;
+  margin-top:5px;
 }
 
 .property label select {
+  margin-top:5px;
   padding: 10px 10px;
 }
 
@@ -54,6 +57,11 @@
 .property button:last-child {
   background: #fff;
   color: #222;
+}
+
+.property button:hover {
+  background: linear-gradient(180deg, rgba(253, 127, 120, 1) 0%, rgba(255, 144, 148, 1) 100%);
+  color:white;
 }
 
 .selecting {
