@@ -11,6 +11,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-bottom:100px;
 }
 
 .property form {
@@ -47,6 +48,11 @@
   border: none;
   border-radius: 10px;
   width: 300px;
+}
+
+.property button:hover {
+  background: linear-gradient(180deg, rgba(253, 127, 120, 1) 0%, rgba(255, 144, 148, 1) 100%);
+  color:white;
 }
 
 .selecting {

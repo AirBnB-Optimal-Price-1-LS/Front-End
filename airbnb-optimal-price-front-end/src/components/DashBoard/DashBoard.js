@@ -9,6 +9,7 @@ import {
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import "./DashBoard.css";
 import { UserContext } from "../../contexts/UserContext";
+
 //components
 import Header from "./Header";
 import AddListing from "../../components/AddListingPage/AddListing";
@@ -17,53 +18,21 @@ import Home from "../../components/HomePage/Home";
 
 const id = window.localStorage.getItem("userId");
 
-
 const Dashboard = props => {
-  console.log("DB PROPS:", props);
-  const [userProperty, setUserProperty] = useState([
-    // {
-    //   id: Date.now(),
-    //   minimum_nights: 2,
-    //   name: "Kevin's house",
-    //   neighborhood: "Santa Barbara",
-    //   neighborhood_group: "Downtown SB",
-    //   room_type: "Entire house/apt",
-    //   user_id: 1
-    // }
-  ]);
+  // console.log("DB PROPS:", props);
+  const [userProperty, setUserProperty] = useState([]);
   const [loggedInUser, SetLoggedInUser] = useState([]);
   console.log("users Properties:", userProperty);
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`/users/${props.userId}/property`)
+      .get(`/users/${window.localStorage.getItem("userId")}/property`)
       .then(res => {
         setUserProperty([...userProperty, ...res.data]);
-        console.log("THE RES:", res);
       })
-      .then(res => console.log("LOGGING IN...:", res))
       .catch(err => console.log(err));
   }, [props.userId]);
 
-  
-
-  // useEffect(() => {
-  //   setUserProperty([...init]);
-  // }, []);
-
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`/users/${id}`)
-  //     .then(res => {
-  //       SetLoggedInUser({ ...res.data });
-  //       console.log("user in get/id:", res);
-  //     })
-
-  //     .catch(err => console.log(err));
-  // }, []);
-  // if (id === null) {
-  //   return <h1> Loading... </h1>;
-  // } else {
   return (
     <UserContext.Provider
       value={{ userProperty, loggedInUser, setUserProperty }}
@@ -85,13 +54,18 @@ const Dashboard = props => {
         <Route
           path="/Dashboard/EditListing/:id"
           render={props => {
-            return <EditListingPage userProperty={userProperty} {...props} />;
+            return (
+              <EditListingPage
+                userProperty={userProperty}
+                {...props}
+                // loggedInUser={loggedInUser}
+              />
+            );
           }}
         />
       </div>
     </UserContext.Provider>
   );
-  // }
 };
 
 export default Dashboard;

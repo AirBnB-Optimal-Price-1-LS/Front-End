@@ -23,7 +23,7 @@ const Login = props => {
   console.log("CREDS:", credentials);
 
   const submit = (values, tools) => {
-    console.log(values, tools);
+    // console.log(values, tools);
     axiosWithAuth()
       .post("/auth/login", values)
       .then(res => {
