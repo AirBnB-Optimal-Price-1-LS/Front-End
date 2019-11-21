@@ -20,8 +20,7 @@ const Header = props => {
       <h2 className="welcomeSign"> <a href="/Dashboard/Home"><img src={airbnb} className="welcomeLogo" /></a>Welcome </h2>
       {userProperty.length === 0 ? (
         <p>
-          Click Here To Add A Property!{" "}
-          <button onClick={redirectToAddListing}>Add Property!</button>
+         Loading...
         </p>
       ) : userProperty.length === 1 ? (
         <p>
