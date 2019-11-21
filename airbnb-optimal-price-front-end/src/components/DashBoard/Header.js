@@ -3,6 +3,7 @@ import { UserContext } from "../../contexts/UserContext";
 //styles
 import "./Header.css";
 
+
 const Header = props => {
   const { userProperty, loggedInUser } = useContext(UserContext);
   console.log("HEADER CONTEXTS:", userProperty, loggedInUser);
@@ -12,9 +13,10 @@ const Header = props => {
     props.history.push("/Dashboard/addListing");
   };
 
+
   return (
     <div className="Header-Container">
-      <h2>Welcome, {loggedInUser.username}</h2>
+      <h2>Welcome {loggedInUser.username}</h2>
       {userProperty.length === 0 ? (
         <p>
           Click Here To Add A Property!{" "}
