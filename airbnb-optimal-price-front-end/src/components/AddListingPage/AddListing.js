@@ -4,6 +4,9 @@ import {axiosWithAuth} from '../../axiosWithAuth/axiosWithAuth'
 import { UserContext } from "../../contexts/UserContext";
 import "./addListing.css";
 
+function AddListing(props) {
+  let id = parseInt(localStorage.getItem("userId"));
+  console.log(id);
 
 function AddListing(props){
   const { userProperty, setUserProperty} = useContext(UserContext);
@@ -31,7 +34,7 @@ function AddListing(props){
     });
   };
 
-const addListing = event => {
+  const addListing = event => {
     event.preventDefault();
     console.log(property)
     axiosWithAuth()
