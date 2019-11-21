@@ -5,7 +5,7 @@
   align-items: baseline;
   background-color: #ff5a5f;
   color: white;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.55) 100%),
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.45) 100%),
     url("https://images.unsplash.com/photo-1514589553259-ed2658dad420?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1607&q=80");
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -63,3 +63,10 @@
 .noProperties:hover {
   text-decoration: underline;
 }
+
+@media only screen and (max-width:600px){
+  .rightHeader p{
+    display:none;
+  }
+}
+
