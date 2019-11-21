@@ -1,58 +1,30 @@
 import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import axios from "axios";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
-import "./EditListingPage.css";
+import { UserContext } from "../../contexts/UserContext";
+import "../AddListingPage/addListing.css";
 
+const EditListing = props => {
+  const { userProperty, loggedInUser, setUserProperty } = useContext(
+    UserContext
+  );
+  console.log("IN EDIT FORM PROPS MATCH:", props.match.params.id);
+  console.log("USER PROPERTIES IN UPDATE FORM:", userProperty);
+  let id = parseInt(localStorage.getItem("userId"));
+  console.log(id);
 
-const EditListingPage = props => {
-  const { userProperty, loggedInUser, setUserProperty } = useContext(UserContext);
-  // const [addedProperty, setAddedProperty] = useState(intialInput);
-  const [radioType, setRadioType] = useState([]);
-  // const [radioType, setRadioType] = useState(radioTypes);
-  // console.log("ADD FORM:", addedProperty);
-  console.log("EDIT PAGE:", radioType);
-
-  const handleNeighbourhoodChange = changeEvent => {
-    setRadioType({
-      ...radioType,
-      neighbourhood_group_cleansed: changeEvent.target.value
-    });
-  };
-
-  const handleBedTypeChange = changeEvent => {
-    setRadioType({
-      ...radioType,
-      bed_type: changeEvent.target.value
-    });
-  };
-
-  const handleRoomChange = changeEvent => {
-    setRadioType({
-      ...radioType,
-      room_type: changeEvent.target.value
-    });
-  };
-
-  // const handleAmenitiesChange = changeEvent => {
-  //   console.log(changeEvent.target.checked);
-  //   const amenities = radioType.amenities;
-  //   let index;
-  //   changeEvent.target.checked
-  //     ? setRadioType({
-  //         ...radioType,
-  //         amenities: [...radioType.amenities, changeEvent.target.value]
-  //       })
-  //     : (index = amenities.indexOf(+changeEvent.target.value));
-  // };
-
-  const handleChange = e => {
-    let propertyId = props.match.params.id;
-    setRadioType({
-      ...radioType,
-      id: propertyId,
-      [e.target.name]: e.target.value
-    });
-  };
+  const [property, setProperty] = useState({
+    bedrooms: 0,
+    bathrooms: 0,
+    beds: 0,
+    bed_type: "",
+    security_deposit: 0,
+    cleaning_fee: 0,
+    minimum_nights: 0,
+    room_type: "",
+    neighbourhood_group_cleansed: "",
+    amenities: "null"
+  });
 
   useEffect(() => {
     // only set the state if we have data from the api
@@ -61,500 +33,163 @@ const EditListingPage = props => {
       const newProperty = userProperty.find(
         item => `${item.id}` === props.match.params.id
       );
-      setRadioType(newProperty);
+      setProperty(newProperty);
     }
   }, [userProperty, props.match.params.id]);
 
-
-const addListing = event => {
-    event.preventDefault();
-    console.log(radioType)
-    axiosWithAuth()
-    .get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${radioType.bedrooms}&bathrooms=${radioType.bathrooms}&beds=${radioType.beds}&bed_type=${radioType.bed_type}&security_deposit=${radioType.security_deposit}&cleaning_fee=${radioType.cleaning_fee}&minimum_nights=${radioType.minimum_nights}&room_type=${radioType.room_type}&neighbourhood_group_cleansed=${radioType.neighbourhood_group_cleansed}&amenities=null`)
-     .then(response => {
-        console.log(response.data)
-        console.log(props.match.params.id)
-        axiosWithAuth().put(`/property/${props.match.params.id}`, response.data)
-        let updatedProperties = userProperty.filter(item => item.id !== props.match.params.id)
-        setUserProperty([...updatedProperties, response.data])
-        props.history.push('/Dashboard/Home')   
-     })
-     .catch(error => {
-        console.log(error)
-     })
+  const handleChange = event => {
+    setProperty({
+      ...property,
+      [event.target.name]: event.target.value
+    });
   };
 
-
+  const addListing = event => {
+    event.preventDefault();
+    // console.log(radioType);
+    axiosWithAuth()
+      .get(
+        `https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}&amenities=null`
+      )
+      .then(response => {
+        console.log("THE RES:", response.data);
+        // console.log(props.match.params.id);
+        axiosWithAuth().put(
+          `/property/${props.match.params.id}`,
+          response.data
+        );
+        let updatedProperties = userProperty.filter(
+          item => item.id !== props.match.params.id
+        );
+        console.log("UPDATED PROPERTY === :", updatedProperties);
+        // console.log("updatedProperties", updatedProperties);
+        setUserProperty([...updatedProperties, response.data]);
+        // props.history.push("/Dashboard/Home");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   return (
-    <div className="updateContainer">
-      <div className="h1Container">
-        <h1>Update Listing</h1>
-      </div>
-      <form className="editPageForm" onSubmit={() => addListing}>
-        
-        <div className="neighbourhoodGroupContainer">
-          <h2>Neighborhood: </h2>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Spandau"
-              checked={radioType.neighbourhood_group_cleansed === "Spandau"}
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Spandau
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Marzahn - Hellersdorf"
-              checked={
-                radioType.neighbourhood_group_cleansed ===
-                "Marzahn - Hellersdorf"
-              }
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Marzahn - Hellersdorf
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Reinickendorf"
-              checked={
-                radioType.neighbourhood_group_cleansed === "Reinickendorf"
-              }
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Reinickendorf
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Steglitz - Zehlendorf"
-              checked={
-                radioType.neighbourhood_group_cleansed ===
-                "Steglitz - Zehlendorf"
-              }
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Steglitz - Zehlendorf
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Treptow - Köpenick"
-              checked={
-                radioType.neighbourhood_group_cleansed === "Treptow - Köpenick"
-              }
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Treptow - Köpenick
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Lichtenberg"
-              checked={radioType.neighbourhood_group_cleansed === "Lichtenberg"}
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Lichtenberg
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Tempelhof - Schöneberg"
-              checked={
-                radioType.neighbourhood_group_cleansed ===
-                "Tempelhof - Schöneberg"
-              }
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Tempelhof - Schöneberg
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Charlottenburg-Wilm."
-              checked={
-                radioType.neighbourhood_group_cleansed ===
-                "Charlottenburg-Wilm."
-              }
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Charlottenburg-Wilm
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Neukölln"
-              checked={radioType.neighbourhood_group_cleansed === "Neukölln"}
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Neukölln
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Pankow"
-              checked={radioType.neighbourhood_group_cleansed === "Pankow"}
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Pankow
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="neighbourhood_group_cleansed"
-              value="Friedrichshain-Kreuzberg"
-              checked={
-                radioType.neighbourhood_group_cleansed ===
-                "Friedrichshain-Kreuzberg"
-              }
-              onChange={handleNeighbourhoodChange}
-              className="form-check-input"
-            />
-            Friedrichshain-Kreuzberg
-          </label>
-        </div>
-        {/* <div className="amenitiesGroupContainer">
-          <h2>Amenities:</h2>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Lock on bedroom door"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Lock on bedroom door
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Laptop friendly workspace"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Laptop friendly workspace
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="TV"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            TV
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Heating"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Heating
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Smoke detector"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Smoke detector
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Hair dryer"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Hair dryer
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Wifi"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Wifi
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Shampoo"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Shampoo
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Iron"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Iron
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Dishes and silverware"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Dishes and silverware
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Internet"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Internet
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Host greets you"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Host greets you
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Hangers"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Hangers
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value="Refrigerator"
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Refrigerator
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name={radioType.amenities}
-              value={radioType.amenities}
-              onChange={handleAmenitiesChange}
-              className="form-check-input"
-            />
-            Free street parking
-          </label>
-        </div> */}
-        <div className="bedTypeContainer">
-          <h2>Bed Type: </h2>
-          <label>
-            <input
-              type="radio"
-              name="bed_type"
-              value="Airbed"
-              checked={radioType.bed_type === "Airbed"}
-              onChange={handleBedTypeChange}
-              className="form-check-input"
-            />
-            Airbed
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="bed_type"
-              value="Futon"
-              checked={radioType.bed_type === "Futon"}
-              onChange={handleBedTypeChange}
-              className="form-check-input"
-            />
-            Futon
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="bed_type"
-              value="Couch"
-              checked={radioType.bed_type === "Couch"}
-              onChange={handleBedTypeChange}
-              className="form-check-input"
-            />
-            Couch
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="bed_type"
-              value="Pull-out Sofa"
-              checked={radioType.bed_type === "Pull-out Sofa"}
-              onChange={handleBedTypeChange}
-              className="form-check-input"
-            />
-            Pull-out Sofa
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="bed_type"
-              value="Real Bed"
-              checked={radioType.bed_type === "Real Bed"}
-              onChange={handleBedTypeChange}
-              className="form-check-input"
-            />
-            Real Bed
-          </label>
-        </div>
-        <div className="roomTypeContainer">
-          <h2>Room Type: </h2>
-          <label>
-            <input
-              type="radio"
-              name="room_type"
-              value="Private room"
-              checked={radioType.room_type === "Private room"}
-              onChange={handleRoomChange}
-              className="form-check-input"
-            />
-            Private room
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="room_type"
-              value="Entire home/apt"
-              checked={radioType.room_type === "Entire home/apt"}
-              onChange={handleRoomChange}
-              className="form-check-input"
-            />
-            Entire home/apt
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="room_type"
-              value="Shared room"
-              checked={radioType.room_type === "Shared room"}
-              onChange={handleRoomChange}
-              className="form-check-input"
-            />
-            Shared room
-          </label>
-        </div>
-        <div className="regularInputContainer">
-          <label>
-            Bathrooms:
-            <input
-              type="text"
-              placeholder="How Many Bathrooms?"
-              name="bathrooms"
-              value={radioType.bathrooms}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Bedrooms:
-            <input
-              type="text"
-              placeholder="How many Bedrooms?"
-              name="bedrooms"
-              value={radioType.bedrooms}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Beds:
-            <input
-              type="text"
-              placeholder="How many beds?"
-              name="beds"
-              value={radioType.beds}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Cleaning Fee:
-            <input
-              type="text"
-              placeholder="Cleaning Fee?"
-              name="cleaning_fee"
-              value={radioType.cleaning_fee}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Minimum Nights:
-            <input
-              type="text"
-              placeholder="Minimum Night?"
-              name="minimum_nights"
-              value={radioType.minimum_nights}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Security Deposit:
-            <input
-              type="text"
-              placeholder="Security Deposit?"
-              name="security_deposit"
-              value={radioType.security_deposit}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
+    <div className="property">
+      <h1>Optimize Your Airbnb Space</h1>
+      <form onSubmit={addListing}>
+        <label>
+          <input
+            type="number"
+            name="bedrooms"
+            value={property.bedrooms || ""}
+            onChange={handleChange}
+            min="0"
+            placeholder="Number of bedrooms"
+          />
+        </label>
+        <label>
+          <input
+            type="number"
+            name="bathrooms"
+            value={property.bathrooms || ""}
+            onChange={handleChange}
+            min="0"
+            placeholder="Number of bathrooms"
+          />
+        </label>
+        <label>
+          <input
+            type="number"
+            name="beds"
+            value={property.beds || ""}
+            onChange={handleChange}
+            min="0"
+            placeholder="Number of beds"
+          />
+        </label>
+        <label>
+          <input
+            type="number"
+            name="security_deposit"
+            value={property.security_deposit || ""}
+            onChange={handleChange}
+            min="0"
+            placeholder="Security deposit"
+          />
+        </label>
+        <label>
+          <input
+            type="number"
+            name="cleaning_fee"
+            value={property.cleaning_fee || ""}
+            onChange={handleChange}
+            min="0"
+            placeholder="Cleaning fee"
+          />
+        </label>
+        <label>
+          <input
+            type="number"
+            name="minimum_nights"
+            value={property.minimum_nights || ""}
+            onChange={handleChange}
+            min="0"
+            placeholder="Minimum number of nights"
+          />
+        </label>
+        <label>
+          <select
+            className="selecting"
+            name="bed_type"
+            value={property.bed_type}
+            onChange={handleChange}
+          >
+            <option value="none">What type of bed(s) do you offer?</option>
+            <option value="Airbed">Airbed</option>
+            <option value="Couch">Couch</option>
+            <option value="Futon">Futon</option>
+            <option value="Pull-outSofa">Pull-out Sofa</option>
+            <option value="RealBed">Real Bed</option>
+          </select>
+        </label>
+        <label>
+          <select
+            className="selecting"
+            name="neighbourhood_group_cleansed"
+            value={property.neighbourhood_group_cleansed}
+            onChange={handleChange}
+          >
+            <option value="none">Where is your property?</option>
+            <option value="Spandau">Spandau</option>
+            <option value="Marzahn-Hellersdorf">Marzahn - Hellersdorf</option>
+            <option value="Steglitz-Zehlendorf">Steglitz - Zehlendorf</option>
+            <option value="Treptow-Köpenick">Treptow - Köpenick</option>
+            <option value="Lichtenberg">Lichtenberg</option>
+            <option value="Tempelhof-Schöneberg">Tempelhof - Schöneberg</option>
+            <option value="Charlottenburg-Wilm.">Charlottenburg-Wilm.</option>
+            <option value="Neukölln">Neukölln</option>
+            <option value="Pankow">Pankow</option>
+            <option value="Mitte">Mitte</option>
+            <option value="Friedrichshain-Kreuzberg">
+              Friedrichshain-Kreuzberg
+            </option>
+          </select>
+        </label>
+        <label>
+          <select
+            className="selecting"
+            name="room_type"
+            value={property.room_type}
+            onChange={handleChange}
+          >
+            <option value="none">What kind of room(s) do you offer?</option>
+            <option value="Privateroom">Private room</option>
+            <option value="Entirehome/apt">Entire home/apt</option>
+            <option value="Sharedroom">Shared room</option>
+          </select>
+        </label>
       </form>
-      <div className="btnContainer">
-        <button className="editSubmitBtn" onClick={addListing}>
-          SUBMIT
-        </button>
-      </div>
+      <button onClick={addListing}>Submit</button>
     </div>
   );
 };
 
-export default EditListingPage;
-
-
+export default EditListing;
