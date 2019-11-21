@@ -6,6 +6,8 @@ import "./addListing.css";
 
 
 function AddListing(props){
+  const { userProperty, setUserProperty} = useContext(UserContext);
+
   let id = parseInt(localStorage.getItem('userId'))
   console.log(id)
   
@@ -40,6 +42,8 @@ const addListing = event => {
               axiosWithAuth().post(`/users/${id}/property`, response.data)
               .then(response => {
                 console.log(response.data)
+                setUserProperty([...userProperty, response.data])
+                props.history.push("/Dashboard/Home");
               })
               .catch(error => {
                 console.log(error)
@@ -51,7 +55,6 @@ const addListing = event => {
      })
   };
 
-// props.history.push('/Dashboard')
 
    
 

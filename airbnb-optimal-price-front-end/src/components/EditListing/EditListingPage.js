@@ -90,6 +90,7 @@ const addListing = event => {
               axiosWithAuth().put(`/property/${props.match.params.id}`, response.data)
               .then(response => {
                 console.log(response.data)
+                props.history.push("/Dashboard/Home");
               })
               .catch(error => {
                 console.log(error)
@@ -99,7 +100,6 @@ const addListing = event => {
      .catch(error => {
           console.log(error)
      })
-     props.history.push("/Dashboard/Home");
   };
 
 

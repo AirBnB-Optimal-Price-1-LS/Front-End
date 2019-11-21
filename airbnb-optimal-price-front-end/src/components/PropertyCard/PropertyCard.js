@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import "./Card.css";
 
@@ -12,16 +12,20 @@ const PropertyCard = props => {
 
   console.log(props.property.id)
 
+  
   const deleteProperty = e => {
-    e.preventDefault();
     // let id = window.localStorage.getItem("userId");
     console.log(props.property.id)
     axiosWithAuth()
       .delete(`/property/${props.property.id}`)
-      .then(res => console.log(res))
+      .then(res => {
+          props.history.push("/Dashboard/Home");
+      })
       .catch(err => console.log(err));
-    props.history.push("/Dashboard/Home");
   };
+
+ 
+
 
   return (
     <div className="card-container">
