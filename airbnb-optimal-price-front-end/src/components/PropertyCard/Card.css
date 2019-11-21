@@ -3,8 +3,8 @@
   display: inline-block;
   margin: 16px;
   border-radius: 16px;
-  min-width: 380px;
-  box-shadow: 5px 5px 15px rgba(0,0 ,0, .25);
+  min-width: 300px;
+  box-shadow: 0px 8px 15px rgba(124, 124, 124, 0.1);
 }
 
 .card-container .flex {
@@ -13,7 +13,7 @@
 }
 
 .card-container .flex h2 {
-  width: 80%;
+  width: 225px;
 }
 
 .edit-buttons {
@@ -25,6 +25,11 @@
   margin-left: auto;
   font-size: 2rem;
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.edit-buttons ion-icon:hover {
+  color: #00a699;
 }
 
 .top-container {
@@ -32,7 +37,7 @@
   padding: 32px;
   background: rgb(253, 127, 120);
   background: linear-gradient(180deg, rgba(253, 127, 120, 1) 0%, rgba(255, 144, 148, 1) 100%);
-  border-radius: 16px;
+  border-radius: 0 0 16px 16px;
   box-shadow: 0px 8px 15px rgba(124, 124, 124, 0.1);
 }
 
@@ -57,4 +62,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.image-card {
+  height: 321px;
+  width: 321px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.image-card img {
+  max-height: 100%;
 }
