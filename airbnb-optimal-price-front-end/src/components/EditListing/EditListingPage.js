@@ -6,9 +6,7 @@ import "../AddListingPage/addListing.css";
 
 const EditListing = props => {
   const currentPropertyId = parseInt(props.match.params.id);
-  const { userProperty, loggedInUser, setUserProperty } = useContext(
-    UserContext
-  );
+  const { userProperty, setUserProperty } = useContext(UserContext);
   console.log("IN EDIT FORM PROPS MATCH:", props.match.params.id);
   console.log("USER PROPERTIES IN UPDATE FORM:", userProperty);
   let id = parseInt(localStorage.getItem("userId"));
@@ -83,7 +81,8 @@ const EditListing = props => {
     <div className="property">
       <h1>Update Your Airbnb Space</h1>
       <form onSubmit={addListing}>
-        <label>
+        <label className="updateLabel">
+          Number of bedrooms:
           <input
             type="number"
             name="bedrooms"
@@ -93,7 +92,8 @@ const EditListing = props => {
             placeholder="Number of bedrooms"
           />
         </label>
-        <label>
+        <label className="updateLabel">
+          Number of bathrooms:
           <input
             type="number"
             name="bathrooms"
@@ -103,7 +103,8 @@ const EditListing = props => {
             placeholder="Number of bathrooms"
           />
         </label>
-        <label>
+        <label className="updateLabel">
+          Number of beds:
           <input
             type="number"
             name="beds"
@@ -113,7 +114,8 @@ const EditListing = props => {
             placeholder="Number of beds"
           />
         </label>
-        <label>
+        <label className="updateLabel">
+          Security deposit:
           <input
             type="number"
             name="security_deposit"
@@ -123,7 +125,8 @@ const EditListing = props => {
             placeholder="Security deposit"
           />
         </label>
-        <label>
+        <label className="updateLabel">
+          Cleaning fee:
           <input
             type="number"
             name="cleaning_fee"
@@ -133,7 +136,8 @@ const EditListing = props => {
             placeholder="Cleaning fee"
           />
         </label>
-        <label>
+        <label className="updateLabel">
+          minimum_nights:
           <input
             type="number"
             name="minimum_nights"
@@ -158,7 +162,7 @@ const EditListing = props => {
             <option value="RealBed">Real Bed</option>
           </select>
         </label>
-        <label>
+        <label className="updateLabel">
           <select
             className="selecting"
             name="neighbourhood_group_cleansed"
