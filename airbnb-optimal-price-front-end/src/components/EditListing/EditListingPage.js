@@ -6,9 +6,7 @@ import "../AddListingPage/addListing.css";
 
 const EditListing = props => {
   const currentPropertyId = parseInt(props.match.params.id);
-  const { userProperty, loggedInUser, setUserProperty } = useContext(
-    UserContext
-  );
+  const { userProperty, setUserProperty } = useContext(UserContext);
   console.log("IN EDIT FORM PROPS MATCH:", props.match.params.id);
   console.log("USER PROPERTIES IN UPDATE FORM:", userProperty);
   let id = parseInt(localStorage.getItem("userId"));

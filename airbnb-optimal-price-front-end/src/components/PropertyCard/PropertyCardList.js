@@ -3,7 +3,7 @@ import PropertyCard from "../PropertyCard/PropertyCard";
 import { UserContext } from "../../contexts/UserContext";
 
 const PropertyCardList = props => {
-  const { userProperty, loggedInUser } = useContext(UserContext);
+  const { userProperty } = useContext(UserContext);
 
   return (
     <div className="card-storage">
