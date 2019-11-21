@@ -68,6 +68,7 @@ function AddListing(props) {
       <h1>Optimize Your Airbnb Space</h1>
       <form onSubmit={addListing}>
         <label>
+          Number of bedrooms:
           <input
             type="number"
             name="bedrooms"
@@ -78,6 +79,7 @@ function AddListing(props) {
           />
         </label>
         <label>
+          Number of bathrooms:
           <input
             type="number"
             name="bathrooms"
@@ -88,6 +90,7 @@ function AddListing(props) {
           />
         </label>
         <label>
+          Number of beds:
           <input
             type="number"
             name="beds"
@@ -98,6 +101,7 @@ function AddListing(props) {
           />
         </label>
         <label>
+          Security deposit:
           <input
             type="number"
             name="security_deposit"
@@ -108,6 +112,7 @@ function AddListing(props) {
           />
         </label>
         <label>
+          Cleaning fee:
           <input
             type="number"
             name="cleaning_fee"
@@ -118,6 +123,7 @@ function AddListing(props) {
           />
         </label>
         <label>
+          Minimum nights:
           <input
             type="number"
             name="minimum_nights"
