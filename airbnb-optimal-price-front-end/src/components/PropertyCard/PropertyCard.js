@@ -21,7 +21,34 @@ const PropertyCard = props => {
   };
 
   return (
-    <div className="cardContainer">
+    <div className="card-container">
+      <div className='top-container'>
+        <div className='flex'>
+          <h2>{props.property.neighbourhood_group_cleansed}</h2>
+          <div className='edit-buttons'>
+            <ion-icon className='ion-icon' name="ios-create" onClick={editProperty}></ion-icon>
+            <ion-icon className='ion-icon'  name="ios-trash" onClick={deleteProperty}></ion-icon>
+          </div>
+        </div>
+        <div className='property-info'>
+          <p>Bedrooms: {props.property.bedrooms}</p>
+          <p>Bathrooms: {props.property.bathrooms}</p>
+          <p>Beds: {props.property.beds}</p>
+          <p>Bed Type: {props.property.bed_type}</p>
+          <p>Security Deposity: {props.property.security_deposit}</p>
+          <p>Cleaning Fee: {props.property.cleaning_fee}</p>
+          <p>Room Type: {props.property.room_type}</p>
+        </div>
+      </div>
+      <p className='price'>${props.property.estimated_price}<span>/night</span></p>
+    </div>
+  );
+};
+
+export default PropertyCard;
+
+
+{/* <div className="cardContainer">
       <div className="topHalf">
         <h3>{props.property.name}</h3>
         <p>Minimum Nights: {props.property.minimum_nights}</p>
@@ -37,8 +64,4 @@ const PropertyCard = props => {
           Delete Property
         </button>
       </div>
-    </div>
-  );
-};
-
-export default PropertyCard;
+    </div> */}
