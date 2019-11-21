@@ -1,19 +1,17 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import {axiosWithAuth} from '../../axiosWithAuth/axiosWithAuth'
+import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import { UserContext } from "../../contexts/UserContext";
 import "./addListing.css";
 
+let id = parseInt(localStorage.getItem("userId"));
+
 function AddListing(props) {
+  const { userProperty, setUserProperty } = useContext(UserContext);
+
   let id = parseInt(localStorage.getItem("userId"));
   console.log(id);
 
-function AddListing(props){
-  const { userProperty, setUserProperty} = useContext(UserContext);
-
-  let id = parseInt(localStorage.getItem('userId'))
-  console.log(id)
-  
   const [property, setProperty] = useState({
     bedrooms: 0,
     bathrooms: 0,
@@ -36,30 +34,30 @@ function AddListing(props){
 
   const addListing = event => {
     event.preventDefault();
-    console.log(property)
+    console.log(property);
     axiosWithAuth()
-    .get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}&amenities=null`)
-     .then(response => {
-          console.log(response.data)
-          if(response.data){
-              axiosWithAuth().post(`/users/${id}/property`, response.data)
-              .then(response => {
-                console.log(response.data)
-                setUserProperty([...userProperty, response.data])
-                props.history.push("/Dashboard/Home");
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }          
-     })
-     .catch(error => {
-          console.log(error)
-     })
+      .get(
+        `https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}&amenities=null`
+      )
+      .then(response => {
+        console.log(response.data);
+        if (response.data) {
+          axiosWithAuth()
+            .post(`/users/${id}/property`, response.data)
+            .then(response => {
+              console.log(response.data);
+              setUserProperty([...userProperty, response.data]);
+              props.history.push("/Dashboard/Home");
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
-
-
-   
 
   return (
     <div className="property">
@@ -184,8 +182,7 @@ function AddListing(props){
 
 export default AddListing;
 
-{
-  /* {
+/* {
         amenitiesList.map(item => {
           return(
              <select key={item} name="amenities" value={property.amenities} onClick={addAmenities} >
@@ -211,7 +208,6 @@ export default AddListing;
         })
 
       } */
-}
 
 // const amenitiesList = [
 //   "Lock on bedroom door",
