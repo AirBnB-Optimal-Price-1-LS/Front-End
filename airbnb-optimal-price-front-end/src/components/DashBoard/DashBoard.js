@@ -51,7 +51,13 @@ const Dashboard = props => {
         <Route
           path="/Dashboard/EditListing/:id"
           render={props => {
-            return <EditListingPage userProperty={userProperty} {...props} />;
+            return (
+              <EditListingPage
+                userProperty={userProperty}
+                {...props}
+                // loggedInUser={loggedInUser}
+              />
+            );
           }}
         />
       </div>

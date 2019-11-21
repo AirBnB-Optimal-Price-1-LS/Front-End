@@ -1,7 +1,7 @@
 .card-container {
   background: #fff;
   display: inline-block;
-  margin: 16px;
+  margin: 26px;
   border-radius: 16px;
   min-width: 321px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
@@ -38,7 +38,7 @@
 
 .card-container .flex {
   display: flex;
-  margin-bottom: 32px;
+  margin-bottom: 22px;
 }
 
 .card-container .flex h2 {
@@ -57,9 +57,9 @@
   transition: all 0.1s ease-in-out;
 }
 
-.edit-buttons ion-icon:hover {
+/* .edit-buttons ion-icon:hover {
   color: #00a699;
-}
+} */
 
 .edit-buttons ion-icon:hover {
   transition-timing-function: ease-in;

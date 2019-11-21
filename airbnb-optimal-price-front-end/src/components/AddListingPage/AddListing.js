@@ -76,6 +76,7 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Number of bedrooms"
+            required
           />
         </label>
         <label>
@@ -87,6 +88,7 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Number of bathrooms"
+            required
           />
         </label>
         <label>
@@ -98,6 +100,7 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Number of beds"
+            required
           />
         </label>
         <label>
@@ -109,6 +112,7 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Security deposit"
+            required
           />
         </label>
         <label>
@@ -120,6 +124,7 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Cleaning fee"
+            required
           />
         </label>
         <label>
@@ -131,6 +136,7 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Minimum number of nights"
+            required
           />
         </label>
         <label>
@@ -139,6 +145,7 @@ function AddListing(props) {
             name="bed_type"
             value={property.bed_type}
             onChange={handleChange}
+            required
           >
             <option value="none">What type of bed(s) do you offer?</option>
             <option value="Airbed">Airbed</option>
@@ -154,6 +161,7 @@ function AddListing(props) {
             name="neighbourhood_group_cleansed"
             value={property.neighbourhood_group_cleansed}
             onChange={handleChange}
+            required
           >
             <option value="none">Where is your property?</option>
             <option value="Spandau">Spandau</option>
@@ -177,6 +185,7 @@ function AddListing(props) {
             name="room_type"
             value={property.room_type}
             onChange={handleChange}
+            required
           >
             <option value="none">What kind of room(s) do you offer?</option>
             <option value="Privateroom">Private room</option>
