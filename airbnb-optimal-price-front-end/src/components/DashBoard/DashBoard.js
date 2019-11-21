@@ -9,6 +9,7 @@ import {
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import "./DashBoard.css";
 import { UserContext } from "../../contexts/UserContext";
+
 //components
 import Header from "./Header";
 import AddListing from "../../components/AddListingPage/AddListing";
@@ -32,24 +33,6 @@ const Dashboard = props => {
       .catch(err => console.log(err));
   }, [props.userId]);
 
-  // useEffect(() => {
-  //   setUserProperty([...init]);
-  // }, []);
-
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`/users/${id}`)
-  //     .then(res => {
-  //       SetLoggedInUser({ ...res.data });
-  //       console.log("user in get/id:", res);
-  //     })
-
-  //     .catch(err => console.log(err));
-  // }, []);
-
-  // if (id === null) {
-  //   return <h1> Loading... </h1>;
-  // } else {
   return (
     <UserContext.Provider
       value={{ userProperty, loggedInUser, setUserProperty }}
@@ -83,7 +66,6 @@ const Dashboard = props => {
       </div>
     </UserContext.Provider>
   );
-  // }
 };
 
 export default Dashboard;

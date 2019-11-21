@@ -5,6 +5,7 @@ import { UserContext } from "../../contexts/UserContext";
 import "../AddListingPage/addListing.css";
 
 const EditListing = props => {
+  const currentPropertyId = parseInt(props.match.params.id);
   const { userProperty, loggedInUser, setUserProperty } = useContext(
     UserContext
   );
@@ -28,8 +29,6 @@ const EditListing = props => {
   });
 
   useEffect(() => {
-    // only set the state if we have data from the api
-    // Solves refresh race condition
     if (userProperty.length > 0) {
       const newProperty = userProperty.find(
         item => `${item.id}` === props.match.params.id
@@ -59,13 +58,17 @@ const EditListing = props => {
           `/property/${props.match.params.id}`,
           response.data
         );
+
         let updatedProperties = userProperty.filter(
-          item => item.id !== props.match.params.id
+          item => item.id !== currentPropertyId
         );
         console.log("UPDATED PROPERTY === :", updatedProperties);
         // console.log("updatedProperties", updatedProperties);
-        setUserProperty([...updatedProperties, response.data]);
-        // props.history.push("/Dashboard/Home");
+        setUserProperty([
+          ...updatedProperties,
+          { ...response.data, id: props.match.params.id }
+        ]);
+        props.history.push("/Dashboard/Home");
       })
       .catch(error => {
         console.log(error);
