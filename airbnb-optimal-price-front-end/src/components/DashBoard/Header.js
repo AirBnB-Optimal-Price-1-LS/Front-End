@@ -4,16 +4,14 @@ import airbnb from './airbnb.png'
 //styles
 import "./Header.css";
 
-
 const Header = props => {
-  const { userProperty, loggedInUser } = useContext(UserContext);
+  const { userProperty } = useContext(UserContext);
   // console.log("HEADER CONTEXTS:", userProperty, loggedInUser);
   // console.log("HIS PROPS", props);
 
   const redirectToAddListing = () => {
     props.history.push("/Dashboard/addListing");
   };
-
 
   return (
     <div className="Header-Container">
