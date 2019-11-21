@@ -37,16 +37,21 @@ const addListing = event => {
      .then(response => {
           console.log(response.data)
           if(response.data){
-              axiosWithAuth().post(`https://buildweek-airbnb.herokuapp.com/api/users/${id}/property`, response.data)
-
-          }          // props.history.push('/Dashboard')
+              axiosWithAuth().post(`/users/${id}/property`, response.data)
+              .then(response => {
+                console.log(response.data)
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }          
      })
      .catch(error => {
           console.log(error)
      })
   };
 
-
+// props.history.push('/Dashboard')
 
    
 
