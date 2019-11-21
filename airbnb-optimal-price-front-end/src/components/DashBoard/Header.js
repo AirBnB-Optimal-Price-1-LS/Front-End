@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import airbnb from './airbnb.png'
 //styles
 import "./Header.css";
 
@@ -16,7 +17,7 @@ const Header = props => {
 
   return (
     <div className="Header-Container">
-      <h2>Welcome {loggedInUser.username}</h2>
+      <h2 className="welcomeSign"> <a href="/Dashboard/Home"><img src={airbnb} className="welcomeLogo" /></a>Welcome </h2>
       {userProperty.length === 0 ? (
         <p>
           Click Here To Add A Property!{" "}
