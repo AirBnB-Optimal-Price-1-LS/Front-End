@@ -12,7 +12,6 @@
   -o-background-size: cover;
   background-size: cover;
   background-position: center;
-  border:1px solid red;
 }
 
 .welcomeLogo {
@@ -23,9 +22,6 @@
 .welcomeSign {
   display: flex;
   text-align:left;
-/* padding-top:0;
-margin-top:0; */
-  border:1px solid red;
 }
 
 .welcomeSign a {
