@@ -2,6 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 5%;
+  
 }
 
 .login h1 {
@@ -41,22 +42,31 @@
 
 .form-login button {
   border: none;
-  border-radius: 32px;
+  border-radius: 9px;
   margin-right: 32px;
-  padding: 16px 32px;
+  padding: 12px 32px;
 }
 
 .form-login button {
   background: #ff5a5f;
   color: #fff;
-  box-shadow: 0px 8px 15px rgba(255, 90, 95, 0.1);
   margin-bottom: 32px;
+  box-shadow: 5px 5px 5px rgba(0,0 ,0, .25);
+}
+.form-login button:hover{
+  background-color:#ff6c70;
+  color:white;
 }
 
 .form-login a button {
   background: #fff;
   color: #222;
-  box-shadow: 0px 8px 15px rgba(124, 124, 124, 0.1);
+  box-shadow: 5px 5px 5px rgba(0,0 ,0, .25);
+}
+
+.form-login a button:hover{
+  background:#f4f4f4;
+  color:#222;
 }
 
 .input-container {
