@@ -3,39 +3,38 @@
   display: inline-block;
   margin: 16px;
   border-radius: 16px;
-  min-width: 380px;
-  box-shadow: 5px 5px 15px rgba(0,0 ,0, .25);
-  
-  opacity:0;
-     animation: airbnbProperty;
-     animation-duration: 1.5s;
-     animation-fill-mode:forwards;
-     animation-timing-function:cubic-bezier(0.2,0.8,0.2,1)
+  min-width: 321px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+
+  opacity: 0;
+  animation: airbnbProperty;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @keyframes airbnbProperty {
-     0% {
-          opacity: 0;
-          transform: translateY(40px);
-     }
-     100%{
-          opacity: 1;
-          transform: translateY(0px);
-     }
-}
-@media only screen and (max-width: 500px){
-  .logo-container{
-    padding-top:50px;
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
   }
-  .logo{
-    max-height:353px;
-    height:100%;
-  }
-  .landing-page-button-container{
-    display:none;
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
-
+@media only screen and (max-width: 500px) {
+  .logo-container {
+    padding-top: 50px;
+  }
+  .logo {
+    max-height: 353px;
+    height: 100%;
+  }
+  .landing-page-button-container {
+    display: none;
+  }
+}
 
 .card-container .flex {
   display: flex;
@@ -43,7 +42,7 @@
 }
 
 .card-container .flex h2 {
-  width: 80%;
+  width: 225px;
 }
 
 .edit-buttons {
@@ -55,11 +54,16 @@
   margin-left: auto;
   font-size: 2rem;
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
 }
 
-.edit-buttons ion-icon:hover{
-   transition-timing-function: ease-in;
-  transition: .5s cubic-bezier(0.2,0.8,0.2,1);
+/* .edit-buttons ion-icon:hover {
+  color: #00a699;
+} */
+
+.edit-buttons ion-icon:hover {
+  transition-timing-function: ease-in;
+  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform: translateY(-3px);
 }
 
@@ -68,7 +72,7 @@
   padding: 32px;
   background: rgb(253, 127, 120);
   background: linear-gradient(180deg, rgba(253, 127, 120, 1) 0%, rgba(255, 144, 148, 1) 100%);
-  border-radius: 16px;
+  border-radius: 0 0 16px 16px;
   box-shadow: 0px 8px 15px rgba(124, 124, 124, 0.1);
 }
 
@@ -93,4 +97,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.image-card {
+  height: 321px;
+  width: 321px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.image-card img {
+  max-height: 100%;
 }

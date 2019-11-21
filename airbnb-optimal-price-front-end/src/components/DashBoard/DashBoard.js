@@ -21,7 +21,6 @@ const id = window.localStorage.getItem("userId");
 const Dashboard = props => {
   // console.log("DB PROPS:", props);
   const [userProperty, setUserProperty] = useState([]);
-  const [loggedInUser, SetLoggedInUser] = useState([]);
   console.log("users Properties:", userProperty);
 
   useEffect(() => {
@@ -34,9 +33,7 @@ const Dashboard = props => {
   }, [props.userId]);
 
   return (
-    <UserContext.Provider
-      value={{ userProperty, loggedInUser, setUserProperty }}
-    >
+    <UserContext.Provider value={{ userProperty, setUserProperty }}>
       <div className="mainContainer">
         <Route path="/Dashboard" component={Header} />
         <Route

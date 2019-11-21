@@ -68,6 +68,7 @@ function AddListing(props) {
       <h1>Optimize Your Airbnb Space</h1>
       <form onSubmit={addListing}>
         <label>
+          Number of bedrooms:
           <input
             type="number"
             name="bedrooms"
@@ -75,9 +76,11 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Number of bedrooms"
+            required
           />
         </label>
         <label>
+          Number of bathrooms:
           <input
             type="number"
             name="bathrooms"
@@ -85,9 +88,11 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Number of bathrooms"
+            required
           />
         </label>
         <label>
+          Number of beds:
           <input
             type="number"
             name="beds"
@@ -95,9 +100,11 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Number of beds"
+            required
           />
         </label>
         <label>
+          Security deposit:
           <input
             type="number"
             name="security_deposit"
@@ -105,9 +112,11 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Security deposit"
+            required
           />
         </label>
         <label>
+          Cleaning fee:
           <input
             type="number"
             name="cleaning_fee"
@@ -115,9 +124,11 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Cleaning fee"
+            required
           />
         </label>
         <label>
+          Minimum nights:
           <input
             type="number"
             name="minimum_nights"
@@ -125,6 +136,7 @@ function AddListing(props) {
             onChange={handleChange}
             min="0"
             placeholder="Minimum number of nights"
+            required
           />
         </label>
         <label>
@@ -133,6 +145,7 @@ function AddListing(props) {
             name="bed_type"
             value={property.bed_type}
             onChange={handleChange}
+            required
           >
             <option value="none">What type of bed(s) do you offer?</option>
             <option value="Airbed">Airbed</option>
@@ -148,6 +161,7 @@ function AddListing(props) {
             name="neighbourhood_group_cleansed"
             value={property.neighbourhood_group_cleansed}
             onChange={handleChange}
+            required
           >
             <option value="none">Where is your property?</option>
             <option value="Spandau">Spandau</option>
@@ -171,6 +185,7 @@ function AddListing(props) {
             name="room_type"
             value={property.room_type}
             onChange={handleChange}
+            required
           >
             <option value="none">What kind of room(s) do you offer?</option>
             <option value="Privateroom">Private room</option>
