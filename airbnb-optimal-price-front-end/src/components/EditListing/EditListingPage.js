@@ -14,6 +14,7 @@ const EditListing = props => {
   console.log(id);
 
   const [property, setProperty] = useState({
+    id: Date.now(),
     bedrooms: 0,
     bathrooms: 0,
     beds: 0,
