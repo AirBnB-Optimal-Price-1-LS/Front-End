@@ -19,17 +19,18 @@ const Header = props => {
     <div className="Header-Container">
       <h2 className="welcomeSign"> <a href="/Dashboard/Home"><img src={airbnb} className="welcomeLogo" /></a>Welcome </h2>
       {userProperty.length === 0 ? (
-        <p>
-         Loading...
-        </p>
+        <a className="noProperties" href="/">Logout</a>
       ) : userProperty.length === 1 ? (
         <p>
           You currently have {userProperty.length} property in your inventory
         </p>
       ) : (
+        <div className="rightHeader">
         <p>
           You currently have {userProperty.length} properties in your inventory
         </p>
+        <a href="/">Logout</a>
+        </div>
       )}
     </div>
   );
