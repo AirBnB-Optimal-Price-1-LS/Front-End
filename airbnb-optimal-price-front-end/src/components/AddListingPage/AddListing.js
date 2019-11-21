@@ -3,11 +3,10 @@ import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
 import "./addListing.css";
 
+function AddListing(props) {
+  let id = parseInt(localStorage.getItem("userId"));
+  console.log(id);
 
-function AddListing(props){
-  let id = parseInt(localStorage.getItem('userId'))
-  console.log(id)
-  
   const [property, setProperty] = useState({
     bedrooms: 0,
     bathrooms: 0,
@@ -29,21 +28,22 @@ function AddListing(props){
     console.log(event.target.value);
   };
 
-const addListing = event => {
+  const addListing = event => {
     event.preventDefault();
-    console.log(property)
-    axios.get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}`)
-     .then(response => {
-          console.log(response.data)
-          // axios.post(`https://buildweek-airbnb.herokuapp.com/api/users/${id}/property`, response.data)
-          // props.history.push('/Dashboard')
-     })
-     .catch(error => {
-          console.log(error)
-     })
+    console.log(property);
+    axios
+      .get(
+        `https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}`
+      )
+      .then(response => {
+        console.log(response.data);
+        // axios.post(`https://buildweek-airbnb.herokuapp.com/api/users/${id}/property`, response.data)
+        // props.history.push("/Dashboard");
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
-
-   
 
   return (
     <div className="property">
