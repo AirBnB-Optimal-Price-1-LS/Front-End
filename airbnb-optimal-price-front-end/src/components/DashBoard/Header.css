@@ -1,11 +1,11 @@
 .Header-Container {
   display: flex;
   justify-content: space-between;
-  padding: 0 2%;
+  padding: 2% 10% 8%;
+  align-items: baseline;
   background-color: #ff5a5f;
   color: white;
-  height:240px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%),
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%),
     url("https://images.unsplash.com/photo-1514589553259-ed2658dad420?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1607&q=80");
   -webkit-background-size: cover;
   -moz-background-size: cover;
