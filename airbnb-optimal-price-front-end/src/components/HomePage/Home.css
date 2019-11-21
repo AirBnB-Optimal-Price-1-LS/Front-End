@@ -1,7 +1,7 @@
 .homeBtnContainer {
-  border: 3px solid black;
+  margin-top:15px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: baseline;
 }
 
@@ -9,17 +9,27 @@
   border-radius: 50%;
   height: 4rem;
   width: 4rem;
-  background-color: #ff5a5f;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0px;
   font-size: 2.6rem;
-  color: white;
-  margin-top: 2rem;
-  margin-right: 2rem;
+  color: #ff5a5f;
+  /* margin-top: 2rem; */
+  /* margin-right: 2rem; */
+  box-shadow: 5px 5px 15px rgba(0,0 ,0, .25);
+  border:none;
 }
 
 .homeBtn:hover {
-  background-color: #00a699;
+  background: linear-gradient(180deg, rgba(253, 127, 120, 1) 0%, rgba(255, 144, 148, 1) 100%);
+  color:white;
+}
+
+.homeBtn:active {
+  background: linear-gradient(180deg, rgba(253, 127, 120, 1) 0%, rgba(255, 144, 148, 1) 100%);
+  color:white;
+  box-shadow: 5px 15px 15px rgba(0,0 ,0, .55);
+  transform: translateY(4px);
 }

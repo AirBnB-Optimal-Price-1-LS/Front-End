@@ -22,7 +22,6 @@ const Home = props => {
           +
         </button>
       </div>
-      <h1>HOME</h1>
       <PropertyCardList userProperty={userProperty} history={props.history} />
     </div>
   );
