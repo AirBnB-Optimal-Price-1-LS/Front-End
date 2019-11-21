@@ -137,7 +137,7 @@ const EditListing = props => {
           />
         </label>
         <label className="updateLabel">
-          minimum_nights:
+          Minimum nights:
           <input
             type="number"
             name="minimum_nights"

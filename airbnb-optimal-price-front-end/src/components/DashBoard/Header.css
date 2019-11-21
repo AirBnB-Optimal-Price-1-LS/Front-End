@@ -24,6 +24,11 @@
   justify-content: center;
 }
 
+.welcomeSign a {
+  text-decoration: none;
+  color: #fff;
+}
+
 .rightHeader {
   padding: 0;
   display: flex;

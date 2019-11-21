@@ -19,7 +19,7 @@ const Home = props => {
     <div>
       <div className="homeBtnContainer">
         <button className="homeBtn" onClick={addListing}>
-          +
+          <ion-icon name="add"></ion-icon>
         </button>
       </div>
       <PropertyCardList userProperty={userProperty} history={props.history} />
