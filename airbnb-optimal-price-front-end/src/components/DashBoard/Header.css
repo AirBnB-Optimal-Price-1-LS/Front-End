@@ -1,23 +1,27 @@
 .Header-Container {
   display: flex;
   justify-content: space-between;
-  padding: 2% 10% 8%;
+  padding: 0% 10% 8%;
   align-items: baseline;
   background-color: #ff5a5f;
   color: white;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%),
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.55) 100%),
     url("https://images.unsplash.com/photo-1514589553259-ed2658dad420?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1607&q=80");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background-position: center;
+  height:120px;
 }
 
 .welcomeLogo {
   height: 25px;
   margin-right: 4px;
-  opacity: 0.7;
+  opacity: 1.1;
+}
+.welcomeLogo:hover{
+  opacity:1;
 }
 .welcomeSign {
   display: flex;
