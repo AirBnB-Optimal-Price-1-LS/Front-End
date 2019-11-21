@@ -1,8 +1,10 @@
-import React, {useEffect} from "react";
+import React,{useContext} from "react";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
+import { UserContext } from '../../contexts/UserContext'
 import "./Card.css";
 
 const PropertyCard = props => {
+  const { userProperty, setUserProperty} = useContext(UserContext);
   console.log("IN CARD:", props);
 
   const editProperty = e => {
@@ -12,14 +14,16 @@ const PropertyCard = props => {
 
   console.log(props.property.id)
 
-  
+
   const deleteProperty = e => {
-    // let id = window.localStorage.getItem("userId");
+    e.preventDefault();
     console.log(props.property.id)
     axiosWithAuth()
       .delete(`/property/${props.property.id}`)
       .then(res => {
-          props.history.push("/Dashboard/Home");
+        let newProperties = userProperty.filter(item => item.id !== props.property.id)
+        setUserProperty(newProperties)
+        props.history.push("/Dashboard/Home");
       })
       .catch(err => console.log(err));
   };
@@ -28,7 +32,7 @@ const PropertyCard = props => {
 
 
   return (
-    <div className="card-container">
+    <div className="card-container" key={props.property.id}>
       <div className='top-container'>
         <div className='flex'>
           <h2>{props.property.neighbourhood_group_cleansed}</h2>

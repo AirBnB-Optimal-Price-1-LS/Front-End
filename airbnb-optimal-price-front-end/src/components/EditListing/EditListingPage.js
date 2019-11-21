@@ -5,9 +5,7 @@ import "./EditListingPage.css";
 
 
 const EditListingPage = props => {
-  const { userProperty, loggedInUser, setUserProperty } = useContext(
-    UserContext
-  );
+  const { userProperty, loggedInUser, setUserProperty } = useContext(UserContext);
   // const [addedProperty, setAddedProperty] = useState(intialInput);
   const [radioType, setRadioType] = useState([]);
   // const [radioType, setRadioType] = useState(radioTypes);
@@ -67,17 +65,6 @@ const EditListingPage = props => {
     }
   }, [userProperty, props.match.params.id]);
 
-  // const addListing = e => {
-  //   e.preventDefault();
-  //   axiosWithAuth()
-  //     .put(`/property/${props.match.params.id}`, radioType)
-  //     .then(res => {
-  //       console.log(res);
-  //       // setUserProperty()
-  //     })
-  //     .catch(err => console.log(err));
-  //   props.history.push("/Dashboard/Home");
-  // };
 
 const addListing = event => {
     event.preventDefault();
@@ -85,20 +72,15 @@ const addListing = event => {
     axiosWithAuth()
     .get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${radioType.bedrooms}&bathrooms=${radioType.bathrooms}&beds=${radioType.beds}&bed_type=${radioType.bed_type}&security_deposit=${radioType.security_deposit}&cleaning_fee=${radioType.cleaning_fee}&minimum_nights=${radioType.minimum_nights}&room_type=${radioType.room_type}&neighbourhood_group_cleansed=${radioType.neighbourhood_group_cleansed}&amenities=null`)
      .then(response => {
-          console.log(response.data)
-          if(response.data){
-              axiosWithAuth().put(`/property/${props.match.params.id}`, response.data)
-              .then(response => {
-                console.log(response.data)
-                props.history.push("/Dashboard/Home");
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }          
+        console.log(response.data)
+        console.log(props.match.params.id)
+        axiosWithAuth().put(`/property/${props.match.params.id}`, response.data)
+        let updatedProperties = userProperty.filter(item => item.id !== props.match.params.id)
+        setUserProperty([...updatedProperties, response.data])
+        props.history.push('/Dashboard/Home')   
      })
      .catch(error => {
-          console.log(error)
+        console.log(error)
      })
   };
 
