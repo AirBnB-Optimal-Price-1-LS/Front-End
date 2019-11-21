@@ -6,8 +6,8 @@ import "./Header.css";
 
 const Header = props => {
   const { userProperty, loggedInUser } = useContext(UserContext);
-  console.log("HEADER CONTEXTS:", userProperty, loggedInUser);
-  console.log("HIS PROPS", props);
+  // console.log("HEADER CONTEXTS:", userProperty, loggedInUser);
+  // console.log("HIS PROPS", props);
 
   const redirectToAddListing = () => {
     props.history.push("/Dashboard/addListing");

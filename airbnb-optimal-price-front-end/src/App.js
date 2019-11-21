@@ -19,7 +19,7 @@ import "./App.css";
 
 const App = () => {
   const [userId, setUserId] = useState();
-  console.log("IN APP", userId);
+  // console.log("IN APP", userId);
 
   useEffect(() => {
     setUserId(window.localStorage.getItem("userId"));
