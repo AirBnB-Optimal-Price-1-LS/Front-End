@@ -18,7 +18,7 @@ function AddListing(props){
     minimum_nights: 0,
     room_type: "",
     neighbourhood_group_cleansed: "",
-    amenities: []
+    amenities: null
   });
 
   const handleChange = event => {
