@@ -32,7 +32,7 @@ function AddListing(props){
 const addListing = event => {
     event.preventDefault();
     console.log(property)
-    axios.get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}`)
+    axios.get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}&amenities=null`)
      .then(response => {
           console.log(response.data)
           // axios.post(`https://buildweek-airbnb.herokuapp.com/api/users/${id}/property`, response.data)
