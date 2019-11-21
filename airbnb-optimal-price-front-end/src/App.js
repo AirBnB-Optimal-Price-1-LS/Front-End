@@ -18,14 +18,32 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import "./App.css";
 
 const App = () => {
+  const [userId, setUserId] = useState();
+  console.log("IN APP", userId);
+
+  useEffect(() => {
+    setUserId(window.localStorage.getItem("userId"));
+  }, []);
+
   return (
     <>
       <Switch>
-        <Route exact path="/login" render={props => <Login {...props}/>} />
-        <Route exact path="/register" render={props => <Register {...props}/>} />
+        <Route
+          exact
+          path="/login"
+          render={props => <Login {...props} setUserId={setUserId} />}
+        />
+        <Route
+          exact
+          path="/register"
+          render={props => <Register {...props} />}
+        />
         <Redirect exact from="/" to="login" />
       </Switch>
-      <PrivateRoute path="/Dashboard" component={() => <DashBoard />} />
+      <PrivateRoute
+        path="/Dashboard"
+        component={() => <DashBoard userId={userId} />}
+      />
     </>
   );
 };

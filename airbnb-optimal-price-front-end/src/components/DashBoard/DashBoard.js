@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,9 +7,8 @@ import {
   Redirect
 } from "react-router-dom";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
-import { UserContext } from "../../contexts/UserContext";
 import "./DashBoard.css";
-
+import { UserContext } from "../../contexts/UserContext";
 //components
 import Header from "./Header";
 import AddListing from "../../components/AddListingPage/AddListing";
@@ -102,62 +101,60 @@ const Dashboard = props => {
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`/users/${id}/property`)
+      .get(`/users/${props.userId}/property`)
       .then(res => {
         setUserProperty([...userProperty, ...res.data]);
         console.log("THE RES:", res);
       })
       .then(res => console.log("LOGGING IN...:", res))
-      // .then(res => console.log("RESPONSE:", res))
       .catch(err => console.log(err));
-  }, [id]);
+  }, [props.userId]);
 
   // useEffect(() => {
   //   setUserProperty([...init]);
   // }, []);
 
-  useEffect(() => {
-    axiosWithAuth()
-      .get(`/users/${id}`)
-      .then(res => {
-        SetLoggedInUser({ ...res.data });
-        console.log("user in get/id:", res);
-      })
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get(`/users/${id}`)
+  //     .then(res => {
+  //       SetLoggedInUser({ ...res.data });
+  //       console.log("user in get/id:", res);
+  //     })
 
-      .catch(err => console.log(err));
-  }, []);
-
-  if (!userProperty) {
-    return <p>Loading...</p>;
-  } else {
-    return (
-      <UserContext.Provider
-        value={{ userProperty, loggedInUser, setUserProperty }}
-      >
-        <div className="mainContainer">
-          <Route path="/Dashboard" component={Header} />
-          <Route
-            path="/Dashboard/Home"
-            render={props => {
-              return <Home {...props} />;
-            }}
-          />
-          <Route
-            path="/Dashboard/addListing"
-            render={props => {
-              return <AddListing {...props} />;
-            }}
-          />
-          <Route
-            path="/Dashboard/EditListing/:id"
-            render={props => {
-              return <EditListingPage userProperty={userProperty} {...props} />;
-            }}
-          />
-        </div>
-      </UserContext.Provider>
-    );
-  }
+  //     .catch(err => console.log(err));
+  // }, []);
+  // if (id === null) {
+  //   return <h1> Loading... </h1>;
+  // } else {
+  return (
+    <UserContext.Provider
+      value={{ userProperty, loggedInUser, setUserProperty }}
+    >
+      <div className="mainContainer">
+        <Route path="/Dashboard" component={Header} />
+        <Route
+          path="/Dashboard/Home"
+          render={props => {
+            return <Home {...props} />;
+          }}
+        />
+        <Route
+          path="/Dashboard/addListing"
+          render={props => {
+            return <AddListing {...props} />;
+          }}
+        />
+        <Route
+          path="/Dashboard/EditListing/:id"
+          render={props => {
+            return <EditListingPage userProperty={userProperty} {...props} />;
+          }}
+        />
+      </div>
+    </UserContext.Provider>
+  );
+  // }
 };
 
 export default Dashboard;
