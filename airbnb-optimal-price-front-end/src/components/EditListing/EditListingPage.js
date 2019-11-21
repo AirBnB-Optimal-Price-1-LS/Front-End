@@ -3,35 +3,6 @@ import { UserContext } from "../../contexts/UserContext";
 import { axiosWithAuth } from "../../axiosWithAuth/axiosWithAuth";
 import "./EditListingPage.css";
 
-// let neighbourhood = [
-//   "Spandau",
-//   "Marzahn - Hellersdorf",
-//   "Reinickendorf",
-//   "Steglitz - Zehlendorf",
-//   "Treptow - Köpenick",
-//   "Lichtenberg",
-//   "Tempelhof - Schöneberg",
-//   "Charlottenburg-Wilm.",
-//   "Neukölln",
-//   "Pankow",
-//   "Mitte",
-//   "Friedrichshain-Kreuzberg"
-// ];
-
-// let radioTypes = {
-//   neighbourhood_group_cleansed: "",
-//   amenities: [],
-//   bed_type: [],
-//   room_type: [],
-//   bathrooms: 0,
-//   bedrooms: 0,
-//   beds: 0,
-//   cleaning_fee: 0,
-//   id: 0,
-//   minimum_nights: 1,
-//   security_deposit: 300,
-//   user_id: window.localStorage.getItem("userId")
-// };
 
 const EditListingPage = props => {
   const { userProperty, loggedInUser, setUserProperty } = useContext(
@@ -96,17 +67,42 @@ const EditListingPage = props => {
     }
   }, [userProperty, props.match.params.id]);
 
-  const addListing = e => {
-    e.preventDefault();
+  // const addListing = e => {
+  //   e.preventDefault();
+  //   axiosWithAuth()
+  //     .put(`/property/${props.match.params.id}`, radioType)
+  //     .then(res => {
+  //       console.log(res);
+  //       // setUserProperty()
+  //     })
+  //     .catch(err => console.log(err));
+  //   props.history.push("/Dashboard/Home");
+  // };
+
+const addListing = event => {
+    event.preventDefault();
+    console.log(radioType)
     axiosWithAuth()
-      .put(`/property/${props.match.params.id}`, radioType)
-      .then(res => {
-        console.log(res);
-        // setUserProperty()
-      })
-      .catch(err => console.log(err));
-    props.history.push("/Dashboard/Home");
+    .get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${radioType.bedrooms}&bathrooms=${radioType.bathrooms}&beds=${radioType.beds}&bed_type=${radioType.bed_type}&security_deposit=${radioType.security_deposit}&cleaning_fee=${radioType.cleaning_fee}&minimum_nights=${radioType.minimum_nights}&room_type=${radioType.room_type}&neighbourhood_group_cleansed=${radioType.neighbourhood_group_cleansed}&amenities=null`)
+     .then(response => {
+          console.log(response.data)
+          if(response.data){
+              axiosWithAuth().put(`/property/${props.match.params.id}`, response.data)
+              .then(response => {
+                console.log(response.data)
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }          
+     })
+     .catch(error => {
+          console.log(error)
+     })
+     props.history.push("/Dashboard/Home");
   };
+
+
 
   return (
     <div className="updateContainer">
@@ -114,6 +110,7 @@ const EditListingPage = props => {
         <h1>Update Listing</h1>
       </div>
       <form className="editPageForm" onSubmit={() => addListing}>
+        
         <div className="neighbourhoodGroupContainer">
           <h2>Neighborhood: </h2>
           <label>
@@ -577,3 +574,5 @@ const EditListingPage = props => {
 };
 
 export default EditListingPage;
+
+

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
+import {axiosWithAuth} from '../../axiosWithAuth/axiosWithAuth'
 import { UserContext } from "../../contexts/UserContext";
 import "./addListing.css";
 
@@ -18,7 +19,7 @@ function AddListing(props){
     minimum_nights: 0,
     room_type: "",
     neighbourhood_group_cleansed: "",
-    amenities: null
+    amenities: "null"
   });
 
   const handleChange = event => {
@@ -26,22 +27,31 @@ function AddListing(props){
       ...property,
       [event.target.name]: event.target.value
     });
-    console.log(event.target.value);
   };
 
 const addListing = event => {
     event.preventDefault();
     console.log(property)
-    axios.get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}&amenities=null`)
+    axiosWithAuth()
+    .get(`https://airbnb-prediction-api.herokuapp.com?bedrooms=${property.bedrooms}&bathrooms=${property.bathrooms}&beds=${property.beds}&bed_type=${property.bed_type}&security_deposit=${property.security_deposit}&cleaning_fee=${property.cleaning_fee}&minimum_nights=${property.minimum_nights}&room_type=${property.room_type}&neighbourhood_group_cleansed=${property.neighbourhood_group_cleansed}&amenities=null`)
      .then(response => {
           console.log(response.data)
-          // axios.post(`https://buildweek-airbnb.herokuapp.com/api/users/${id}/property`, response.data)
-          // props.history.push('/Dashboard')
+          if(response.data){
+              axiosWithAuth().post(`/users/${id}/property`, response.data)
+              .then(response => {
+                console.log(response.data)
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }          
      })
      .catch(error => {
           console.log(error)
      })
   };
+
+// props.history.push('/Dashboard')
 
    
 

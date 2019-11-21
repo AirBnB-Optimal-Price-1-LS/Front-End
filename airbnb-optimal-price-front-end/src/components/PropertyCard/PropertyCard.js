@@ -10,11 +10,14 @@ const PropertyCard = props => {
     props.history.push(`/Dashboard/EditListing/${props.property.id}`);
   };
 
+  console.log(props.property.id)
+
   const deleteProperty = e => {
     e.preventDefault();
-    let id = window.localStorage.getItem("userId");
+    // let id = window.localStorage.getItem("userId");
+    console.log(props.property.id)
     axiosWithAuth()
-      .delete(`/property/${id}`)
+      .delete(`/property/${props.property.id}`)
       .then(res => console.log(res))
       .catch(err => console.log(err));
     props.history.push("/Dashboard/Home");
