@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "name": "Front-End",
+  "builds": [
+    {
+      "src": "Front-End/package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "Front-End/$1"
+    }
+  ]
+}
